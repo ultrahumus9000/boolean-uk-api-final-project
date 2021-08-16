@@ -22,8 +22,8 @@ model User {
   avatar     String
   comments   Comment[]
   posts      Post[]
-  archive    Archive   @relation(fields: [archiveId], references: [id])
-  archiveId  Int
+  archive    Archive?  @relation(fields: [archiveId], references: [id])
+  archiveId  Int?
 }
 
 model Comment {
