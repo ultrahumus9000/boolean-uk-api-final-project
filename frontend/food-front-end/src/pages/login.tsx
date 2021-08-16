@@ -7,10 +7,8 @@ function Login() {
     <section className="login">
       <main>
         <h1>Food Journal</h1>
-
         <button>Sign up</button>
         <button>Log in</button>
-
         <form>
           <label>
             Username:
@@ -20,7 +18,7 @@ function Login() {
             Password:
             <input type="text" name="password" />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="submit-input" />
         </form>
       </main>
     </section>
