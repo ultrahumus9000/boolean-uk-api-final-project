@@ -6,19 +6,23 @@ section.login {
   height: 100vh;
 }
 
-h1 {
-  font-size: 2em;
-}
-
 main {
   display: grid;
-  grid-template-columns: minmax(200px, 400px) auto auto;
+  grid-template:
+    "h1 button button" 1fr
+    "form form form" 300px/
+    300px auto auto;
   gap: 1rem;
   background-color: #0f0f0f80;
   padding: 20px;
   border-radius: 10px;
   color: aliceblue;
 }
+
+h1 {
+  font-size: 2em;
+}
+
 main button {
   padding: 5px 10px;
 }
@@ -59,8 +63,24 @@ button {
   background: linear-gradient(45deg, salmon, pink);
   border: none;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 667px) {
   main {
-    grid-template-rows: auto;
+    grid-template:
+      "h1 button button" auto
+      "form form form" 300px/
+      150px auto auto;
+
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  main {
+    grid-template:
+      "h1 button button" auto
+      "form form form" 300px/
+      100px auto auto;
+
+    margin: 10px;
   }
 }

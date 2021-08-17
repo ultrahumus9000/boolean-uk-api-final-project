@@ -7,8 +7,8 @@ function Login() {
     <section className="login">
       <main>
         <h1>Food Journal</h1>
-        <button>Sign up</button>
-        <button>Log in</button>
+        <button className="signup">Sign up</button>
+        <button className="login">Log in</button>
         <form>
           <label>
             Username:

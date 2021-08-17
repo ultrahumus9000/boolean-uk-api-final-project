@@ -2,14 +2,13 @@ import "../styles/login.css";
 
 import React from "react";
 
-function Login() {
+function Signup() {
   return (
-    <section className="signup">
-      <h1>Food Journal</h1>
+    <section className="login">
       <main>
-          <button>Sign up</button>
-          <button>Log in</button>
-
+        <h1>Food Journal</h1>
+        <button className="signup">Sign up</button>
+        <button className="login">Log in</button>
         <form>
           <label>
             Username:
@@ -19,11 +18,11 @@ function Login() {
             Password:
             <input type="text" name="password" />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className="submit-input" />
         </form>
       </main>
     </section>
   );
 }
 
-export default Login;
+export default Signup;

@@ -1,15 +1,19 @@
+backend/node_modules
+# Keep environment variables out of version control
+backend/.env
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
+frontend/food-front-end/node_modules
+frontend/.pnp
 .pnp.js
 
 # testing
-/coverage
+frontend/food-front-end/coverage
 
 # production
-/build
+frontend/food-front-end/build
 
 # misc
 .DS_Store
@@ -21,3 +25,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

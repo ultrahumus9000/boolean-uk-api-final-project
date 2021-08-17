@@ -4,6 +4,7 @@ import { Switch } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import Posts from "./pages/posts";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         </Route>
         <Route path="/signup" exact>
           <Signup />
+        </Route>
+        <Route path="/posts" exact>
+          <Posts />
         </Route>
       </Switch>
     </Router>
