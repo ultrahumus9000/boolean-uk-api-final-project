@@ -36,32 +36,28 @@ const foodtags = [
 
 async function seed() {
   for await (const ele of array) {
-    await db.user.create({
+    const result = await db.user.create({
       data: {
         username: faker.name.lastName(),
         password: faker.internet.password(),
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
-        email: faker.internet.exampleEmail(),
+        email: faker.internet.email(),
         avatar: avatarArray[ele],
         posts: {
           create: {
             date: faker.date.past(1),
             text_content: faker.random.words(10),
             picture: pictures[ele],
-            address: faker.address.cityName(),
+            address: faker.address.city(),
           },
         },
-        archive: {
-          connectOrCreate: {
-            where: {
-              id: ele + 1,
-            },
-            create: {
-              userId: ele + 1,
-            },
-          },
-        },
+      },
+    });
+
+    await db.archive.create({
+      data: {
+        userId: result.id,
       },
     });
   }
@@ -84,8 +80,8 @@ seed()
 //     avatar     String
 //     comments   Comment[]
 //     posts      Post[]
-//     archive    Archive   @relation(fields: [archiveId], references: [id])
-//     archiveId  Int
+//     archive    Archive
+
 //   }
 
 //   model Comment {
