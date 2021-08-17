@@ -1,15 +1,17 @@
 import "../styles/login.css";
 
 import React from "react";
-import "../styles/posts.css"
-import Header from "../components/Header"
+import "../styles/posts.css";
+import Header from "../components/Header";
 
 function Posts() {
   return (
-    <section>
+    <main className="post_page">
       <Header />
-      <main></main>
-    </section>
+      <section className="feed">
+        <article className="post"></article>
+      </section>
+    </main>
   );
 }
 
