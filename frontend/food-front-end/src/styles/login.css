@@ -9,7 +9,7 @@ section.login {
 main {
   display: grid;
   grid-template:
-    "h1 button button" 1fr
+    "h1 buttonone buttontwo" 1fr
     "form form form" 300px/
     300px auto auto;
   gap: 1rem;
@@ -21,6 +21,7 @@ main {
 
 h1 {
   font-size: 2em;
+  grid-area: h1;
 }
 
 main button {
@@ -33,6 +34,7 @@ form {
   row-gap: 2rem;
   padding: 2rem;
   gap: 15px;
+  grid-area: form;
 }
 
 label {
@@ -53,7 +55,12 @@ button {
   font-weight: bolder;
   border-radius: 5px;
 }
-
+.signup {
+  grid-area: buttonone;
+}
+.login {
+  grid-area: buttontwo;
+}
 .submit-input {
   padding: 10px;
   border-radius: 5px;
@@ -66,20 +73,10 @@ button {
 @media screen and (max-width: 667px) {
   main {
     grid-template:
-      "h1 button button" auto
-      "form form form" 300px/
+      "h1 h1" auto
+      "form form " 300px
+      "buttonone buttontwo" auto/
       150px auto auto;
-
-    margin: 10px;
-  }
-}
-
-@media screen and (max-width: 568px) {
-  main {
-    grid-template:
-      "h1 button button" auto
-      "form form form" 300px/
-      100px auto auto;
 
     margin: 10px;
   }
