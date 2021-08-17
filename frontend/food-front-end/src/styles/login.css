@@ -24,10 +24,6 @@ h1 {
   grid-area: h1;
 }
 
-main button {
-  padding: 5px 10px;
-}
-
 form {
   display: grid;
   grid-template-rows: auto;
@@ -48,6 +44,7 @@ label input {
   height: 1.5rem;
 }
 button {
+  padding: 5px 10px;
   background-color: darkcyan;
   color: aliceblue;
   border: none;
@@ -55,6 +52,15 @@ button {
   font-weight: bolder;
   border-radius: 5px;
 }
+button:hover {
+  transform: scale(1.1);
+  filter: saturate(2);
+}
+button:active {
+  transform: scale(1.1);
+  filter: saturate(2);
+}
+
 .signup {
   grid-area: buttonone;
 }
@@ -64,19 +70,31 @@ button {
 .submit-input {
   padding: 10px;
   border-radius: 5px;
-  color: black;
+  color: lavender;
   font-size: 1.5rem;
   font-weight: bolder;
-  background: linear-gradient(45deg, salmon, pink);
+  /* background: linear-gradient(45deg, salmon, pink); */
+  background-color: black;
+  background-image: url("./breads.svg");
+  height: 60px;
   border: none;
 }
+.submit-input:hover {
+  transform: scale(0.9);
+  filter: saturate(1.5);
+}
+.submit-input:active {
+  transform: scale(0.9);
+  filter: saturate(2);
+}
+
 @media screen and (max-width: 667px) {
   main {
     grid-template:
       "h1 h1" auto
       "form form " 300px
       "buttonone buttontwo" auto/
-      150px auto auto;
+      auto auto;
 
     margin: 10px;
   }
