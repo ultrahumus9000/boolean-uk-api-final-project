@@ -7,7 +7,6 @@ CREATE TABLE "User" (
     "last_name" VARCHAR(30) NOT NULL,
     "email" TEXT NOT NULL,
     "avatar" TEXT NOT NULL,
-    "archiveId" INTEGER NOT NULL,
 
     PRIMARY KEY ("id")
 );
@@ -63,6 +62,12 @@ CREATE TABLE "Archive" (
 );
 
 -- CreateTable
+CREATE TABLE "_ArchiveToUser" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "_ArchiveToPost" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -75,13 +80,16 @@ CREATE UNIQUE INDEX "User.username_unique" ON "User"("username");
 CREATE UNIQUE INDEX "User.email_unique" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "_ArchiveToUser_AB_unique" ON "_ArchiveToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ArchiveToUser_B_index" ON "_ArchiveToUser"("B");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_ArchiveToPost_AB_unique" ON "_ArchiveToPost"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_ArchiveToPost_B_index" ON "_ArchiveToPost"("B");
-
--- AddForeignKey
-ALTER TABLE "User" ADD FOREIGN KEY ("archiveId") REFERENCES "Archive"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "comments" ADD FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -99,7 +107,16 @@ ALTER TABLE "PostToTag" ADD FOREIGN KEY ("postId") REFERENCES "posts"("id") ON D
 ALTER TABLE "PostToTag" ADD FOREIGN KEY ("tagId") REFERENCES "Tag"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Archive" ADD FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Archive" ADD FOREIGN KEY ("postId") REFERENCES "posts"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ArchiveToUser" ADD FOREIGN KEY ("A") REFERENCES "Archive"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ArchiveToUser" ADD FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ArchiveToPost" ADD FOREIGN KEY ("A") REFERENCES "Archive"("id") ON DELETE CASCADE ON UPDATE CASCADE;
