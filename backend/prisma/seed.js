@@ -49,7 +49,7 @@ async function seed() {
             date: faker.date.past(1),
             text_content: faker.random.words(10),
             picture: pictures[ele],
-            address: faker.address.cityName(),
+            address: faker.address.city(),
           },
         },
       },
