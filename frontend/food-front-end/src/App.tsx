@@ -8,31 +8,31 @@ import Posts from "./pages/posts";
 import useStore from "./store";
 
 function App() {
-  const fetchUsers = useStore((store) => store.fetchUsers);
-  const fetchUserById = useStore((store) => store.fetchUserById);
+  // const fetchUsers = useStore((store) => store.fetchUsers);
+  // const fetchUserById = useStore((store) => store.fetchUserById);
   const createUser = useStore((store) => store.createUser);
   const updateUser = useStore((store) => store.updateUser);
   const deleteUser = useStore((store) => store.deleteUser);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
-  useEffect(() => {
-    fetchUserById();
-  }, []);
+  // useEffect(() => {
+  //   fetchUserById();
+  // }, []);
 
-  useEffect(() => {
-    createUser();
-  }, []);
+  // useEffect(() => {
+  //   createUser();
+  // }, []);
 
-  useEffect(() => {
-    updateUser();
-  }, []);
+  // useEffect(() => {
+  //   updateUser();
+  // }, []);
 
-  useEffect(() => {
-    deleteUser();
-  }, []);
+  // useEffect(() => {
+  //   deleteUser();
+  // }, []);
 
   return (
     <Router>

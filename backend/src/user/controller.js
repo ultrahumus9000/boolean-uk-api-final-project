@@ -5,20 +5,23 @@ async function getAllUser(req, res) {}
 async function getOneUser(req, res) {}
 
 async function postOneUser(req, res) {
+  console.log("postuser", req.body);
   try {
     const userInfo = await user.create({
       data: req.body,
     });
+    console.log("post create useinfo 13", userInfo);
 
     const result = await archive.create({
       data: {
         userId: userInfo.id,
       },
     });
-
+    console.log("archive 20", result);
     res.json(userInfo);
   } catch (error) {
-    errorHandler(error);
+    console.log(error);
+    res.json(errorHandler(error));
   }
 }
 
@@ -33,7 +36,8 @@ async function deleteOneUser(req, res) {
       },
     });
   } catch (error) {
-    errorHandler(error);
+    console.log(error);
+    res.json(errorHandler(error));
   }
 }
 

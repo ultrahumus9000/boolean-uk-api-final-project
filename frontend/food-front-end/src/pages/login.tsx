@@ -2,12 +2,19 @@ import "../styles/login.css";
 
 import React from "react";
 
+import { Link } from "react-router-dom";
+
+import { useEffect } from "react";
+
 function Login() {
   return (
     <section className="login">
       <main>
         <h1>Food Journal</h1>
-        <button className="signup">Sign up</button>
+        <Link to="/signup">
+          <button className="signup">Sign up</button>
+        </Link>
+
         <button className="login">Log in</button>
         <form>
           <label>

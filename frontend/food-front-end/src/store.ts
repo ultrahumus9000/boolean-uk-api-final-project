@@ -2,15 +2,21 @@ import create from "zustand";
 import Posts from "./pages/posts";
 
 type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   username: string;
   password: string;
+  avatar: string;
+  email: string;
 };
 
 type Store = {
   users: User[];
+  fetchUsers: () => void;
+  fetchUserById: () => void;
+  createUser: (data: User) => void;
+  updateUser: (data: User) => void;
+  deleteUser: () => void;
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -26,7 +32,7 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((user) => set({ users: user }));
   },
-  createUser: () => {
+  createUser: (data) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
@@ -37,7 +43,7 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((data) => console.log(data));
   },
-  updateUser: () => {
+  updateUser: (data) => {
     fetch("http://localhost:3000/users/id", {
       method: "PATCH",
       headers: {
