@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Posts from "./pages/posts";
 import useStore from "./store";
+import Profile from "./pages/profile";
 
 function App() {
   // const fetchUsers = useStore((store) => store.fetchUsers);
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route path="/posts" exact>
           <Posts />
+        </Route>
+        <Route path="/profile" exact>
+          <Profile />
         </Route>
       </Switch>
     </Router>
