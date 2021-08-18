@@ -1,5 +1,14 @@
-const postRouter = require("express").Router();
+const { tag } = require("../../database");
 
-const getPostsByTag = require("./controller");
+const tagRouter = require("express").Router();
 
-postRouter.get("/?tag=tag", getPostsByTag);
+// const getPostsByTag = require("./controller");
+
+// postRouter.get("/?tag=tag", getPostsByTag);
+
+const { getAlltags, createOnetag, deleteOnetag } = require("./controller");
+tagRouter.get("/", getAlltags);
+tagRouter.post("/", createOnetag);
+tagRouter.delete("/:id", deleteOnetag);
+
+module.exports = tagRouter;
