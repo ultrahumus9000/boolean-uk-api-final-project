@@ -8,12 +8,13 @@ import useStore from "../store";
 import { useEffect } from "react";
 
 function Posts() {
+  const comments = useStore((store) => store.comments);
   const posts = useStore((store) => store.posts);
   const fetchPosts = useStore((store) => store.fetchPosts);
 
   useEffect(() => {
     fetchPosts();
-  }, [posts.length]);
+  }, [posts.length, comments.length]);
   console.log(posts);
   return (
     <main className="post_page">

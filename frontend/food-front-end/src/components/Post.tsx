@@ -49,7 +49,7 @@ function Post({ post }: PostProps) {
             </g>
           </svg>
           <p>
-            <span>128</span> likes
+            <span>{post.likes}</span> likes
           </p>
         </div>
         <div className="tags">
