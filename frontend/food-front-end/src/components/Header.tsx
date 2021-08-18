@@ -6,7 +6,7 @@ function Header() {
   const users = useStore((store) => store.users);
   const activeUserId = useStore((store) => store.activeUser);
 
-  const activeUserInfo = users.find((user) => user.id === activeUserId);
+  const activeUserInfo = users.find((user) => user?.id === activeUserId);
   console.log(activeUserInfo?.avatar);
   return (
     <header>

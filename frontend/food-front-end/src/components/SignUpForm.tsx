@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import useStore from "../store";
 import "../styles/sign_up_form.css";
 

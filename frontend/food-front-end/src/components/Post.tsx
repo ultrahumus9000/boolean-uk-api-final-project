@@ -1,10 +1,10 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import { useEffect } from "react";
 import useStore, { SinglePost } from "../store";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SingleComment } from "../store";
-
+import UserForPost from "./UserForPost";
 type PostProps = {
   post: SinglePost;
 };
@@ -14,7 +14,10 @@ type Comments = SingleComment[];
 function Post({ post }: PostProps) {
   const comments = useStore((store) => store.comments);
   const fetchComments = useStore((store) => store.fetchComments);
-
+  const users = useStore((store) => store.users);
+  console.log(users);
+  const postUser = users.find((user) => user?.id === post.userId);
+  console.log(postUser);
   useEffect(() => {
     fetchComments();
   }, [comments.length]);
@@ -25,9 +28,9 @@ function Post({ post }: PostProps) {
     matchedComments = comments.filter((comment) => comment.postId === post.id);
   }
 
-  console.log(comments);
   return (
     <article className="post">
+      <UserForPost postUser={postUser} />
       <img className="post_picture" src={post.picture} alt="foopicture"></img>
       <div className="post_info">
         <p>{post.text_content}</p>

@@ -28,7 +28,7 @@ function Login() {
       password: targetEvent.password.value,
     };
     const activeUserInfo: User | undefined = users.find(
-      (user) => user.username === loginUser.username
+      (user) => user?.username === loginUser.username
     );
 
     if (activeUserInfo === undefined) {

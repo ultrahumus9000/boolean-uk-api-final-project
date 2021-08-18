@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import useStore, { SingleComment } from "../store";
 type CommentProp = {
   comment: SingleComment;
@@ -8,7 +8,7 @@ function Comment({ comment }: CommentProp) {
   const users = useStore((store) => store.users);
 
   const commentUserInfo = users.find((user) => {
-    return user.id === comment.userId;
+    return user?.id === comment.userId;
   });
 
   return (
