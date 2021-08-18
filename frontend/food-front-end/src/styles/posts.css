@@ -20,7 +20,7 @@ header {
 .profile {
   display: grid;
   grid-template-columns: 125px auto;
-  background-color: lightgrey;
+  background-color: #00000020;
   border-radius: 30px;
   width: 20rem;
   height: 10rem;

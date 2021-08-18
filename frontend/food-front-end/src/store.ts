@@ -9,24 +9,26 @@ type newUserFrom = {
   email: string;
 };
 
-export type User = {
-  id: number;
-  first_name: string;
-  last_name: string;
-  username: string;
-  password: string;
-  avatar: string;
-  email: string;
-};
+export type User =
+  | {
+      id: number;
+      first_name: string;
+      last_name: string;
+      username: string;
+      password: string;
+      avatar: string;
+      email: string;
+    }
+  | undefined;
 
-type Comment = {
+export type SingleComment = {
   id: number;
   content: string;
   userId: number;
   postId: number;
 };
 
-type newCommentForm = {
+export type newCommentForm = {
   content: string;
   userId: number;
   postId: number;
@@ -38,7 +40,7 @@ type PostToTag = {
   postId: number;
 };
 
-type Post = {
+export type SinglePost = {
   id: number;
   date: string;
   text_content: string;
@@ -75,8 +77,8 @@ type updatePost = {
 
 type Store = {
   users: User[];
-  posts: Post[];
-  comments: Comment[];
+  posts: SinglePost[];
+  comments: SingleComment[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
@@ -125,7 +127,7 @@ const useStore = create<Store>((set, get) => ({
       .then((newUser) => set({ users: [...get().users, newUser] }));
   },
   updateUser: (data) => {
-    const id = data.id;
+    const id = data?.id;
     fetch("http://localhost:3000/users/id", {
       method: "PATCH",
       headers: {
@@ -136,7 +138,7 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((data) => {
         let updatedUsers = get().users.map((user) => {
-          if (user.id === id) {
+          if (user?.id === id) {
             return data;
           }
           return user;

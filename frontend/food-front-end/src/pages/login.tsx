@@ -18,7 +18,7 @@ function Login() {
     fetchUsers();
   }, []);
 
-  console.log(users);
+  // console.log(users);
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
@@ -28,7 +28,7 @@ function Login() {
       password: targetEvent.password.value,
     };
     const activeUserInfo: User | undefined = users.find(
-      (user) => user.username === loginUser.username
+      (user) => user?.username === loginUser.username
     );
 
     if (activeUserInfo === undefined) {

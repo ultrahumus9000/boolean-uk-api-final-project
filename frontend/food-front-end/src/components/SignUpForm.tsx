@@ -1,11 +1,11 @@
 import React, { SyntheticEvent } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import useStore from "../store";
 import "../styles/sign_up_form.css";
 
 function SignUpForm() {
   const createUser = useStore((store) => store.createUser);
-
+  const history = useHistory();
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
@@ -20,6 +20,7 @@ function SignUpForm() {
     };
     createUser(newUser);
     targetEvent.reset();
+    history.push("/");
   }
 
   return (
@@ -49,9 +50,8 @@ function SignUpForm() {
         Password:
         <input type="text" name="password" required />
       </label>
-      <Link to="/">
-        <input className="signup_submit" type="submit" value="Submit" required />
-      </Link>
+
+      <input className="signup_submit" type="submit" value="Submit" required />
     </form>
   );
 }

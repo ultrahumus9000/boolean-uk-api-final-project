@@ -58,6 +58,8 @@ model PostToTag {
   postId Int
   tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
   tagId  Int
+
+  @@unique([postId, tagId])
 }
 
 model Tag {
