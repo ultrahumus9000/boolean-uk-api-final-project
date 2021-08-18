@@ -6,7 +6,7 @@ section.login {
   height: 100vh;
 }
 
-main {
+main.login_main {
   display: grid;
   grid-template:
     "h1 buttonone buttontwo" 1fr
@@ -24,7 +24,7 @@ h1 {
   grid-area: h1;
 }
 
-form {
+form.login_form{
   display: grid;
   grid-template-rows: auto;
   row-gap: 2rem;

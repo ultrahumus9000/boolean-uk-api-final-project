@@ -1,11 +1,11 @@
-import "../styles/login.css";
+import "../styles/signup.css";
 
 import React from "react";
 import SignUpForm from "../components/SignUpForm";
 
 function Signup() {
   return (
-    <section className="login">
+    <section className="signup">
       <SignUpForm />
     </section>
   );

@@ -62,12 +62,14 @@ type newPostForm = {
 // posttotags     PostToTag[]
 // usersInArchive Archive[]
 
+
 type Store = {
   users: User[];
   posts: Post[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
+
   // fetchUserById: (id: number) => void;
   createUser: (data: newUserFrom) => void;
   updateUser: (data: User) => void;
@@ -75,23 +77,34 @@ type Store = {
   fetchPosts: () => void;
   createPost: (arg: newPostForm) => void;
   deletePost: (id: number) => void;
+
 };
 
 const useStore = create<Store>((set, get) => ({
   users: [],
   posts: [],
+
   activeUser: 0,
   setActiveUser: (userId) => set({ activeUser: userId }),
+
   fetchUsers: () => {
     fetch("http://localhost:3000/users")
       .then((resp) => resp.json())
       .then((users) => set({ users: users }));
   },
+
   // fetchUserById: (id) => {
   //   fetch("http://localhost:3000/users/id")
   //     .then((resp) => resp.json())
   //     .then((user) => set({ users: user }));
   // },
+
+//   fetchUserByUsername: () => {
+//     fetch("http://localhost:3000/users/username").then((resp) =>
+//       resp.json().then((username) => console.log(username))
+//     );
+//   },
+
   createUser: (data) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
@@ -128,11 +141,13 @@ const useStore = create<Store>((set, get) => ({
     });
   },
 
+
   fetchPosts: () => {
     fetch("http://localhost:3000/posts")
       .then((resp) => resp.json())
       .then((postsFromServer) => set({ posts: postsFromServer }));
   },
+
   createPost: (data) => {
     fetch("http://localhost:3000/posts", {
       method: "POST",
@@ -142,6 +157,7 @@ const useStore = create<Store>((set, get) => ({
       body: JSON.stringify(data),
     })
       .then((resp) => resp.json())
+
       .then((newPostFromSever) =>
         set({ posts: [...get().posts, newPostFromSever] })
       );
