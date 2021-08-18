@@ -24,7 +24,7 @@ h1 {
   grid-area: h1;
 }
 
-form.login_form{
+form.login_form {
   display: grid;
   grid-template-rows: auto;
   row-gap: 2rem;
@@ -33,10 +33,14 @@ form.login_form{
   grid-area: form;
 }
 
-label {
+.login_form label {
   font-size: 1.5rem;
   font-weight: bold;
 }
+.passwordInput {
+  margin-left: 12px;
+}
+
 label input {
   margin-left: 5px;
   border: none;
@@ -78,6 +82,7 @@ button:active {
   background-image: url("./breads.svg");
   height: 60px;
   border: none;
+  margin-left: 0px;
 }
 .submit-input:hover {
   transform: scale(0.9);

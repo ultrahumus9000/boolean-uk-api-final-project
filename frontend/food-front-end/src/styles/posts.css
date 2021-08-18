@@ -38,8 +38,7 @@ img.avatar {
 
 h3 {
   display: inline-block;
-  text-align: left;
-  margin-left: 3rem;
+  text-align: center;
   font-size: 2rem;
 }
 
@@ -48,6 +47,7 @@ h3 {
   margin: 3rem;
   grid-template-rows: auto;
 }
+
 
 section.feed {
   display: grid;
@@ -157,6 +157,9 @@ img.post_avatar {
 
 .username {
   grid-area: username;
+
+.post {
+
 }
 
 @media only screen and (max-width: 812px) {
