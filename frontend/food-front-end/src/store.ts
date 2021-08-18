@@ -26,7 +26,7 @@ export type SingleComment = {
   postId: number;
 };
 
-type newCommentForm = {
+export type newCommentForm = {
   content: string;
   userId: number;
   postId: number;

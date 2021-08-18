@@ -56,7 +56,7 @@ function Post({ post }: PostProps) {
           <span className="tag">American</span>
         </div>
       </div>
-      <CommentForm />
+      <CommentForm postId={post.id} />
       <div className="comments">
         {matchedComments.map((comment) => {
           return <Comment comment={comment} />;

@@ -10,9 +10,9 @@ import useStore from "./store";
 function App() {
   // const fetchUsers = useStore((store) => store.fetchUsers);
   // const fetchUserById = useStore((store) => store.fetchUserById);
-  const createUser = useStore((store) => store.createUser);
-  const updateUser = useStore((store) => store.updateUser);
-  const deleteUser = useStore((store) => store.deleteUser);
+  // const createUser = useStore((store) => store.createUser);
+  // const updateUser = useStore((store) => store.updateUser);
+  // const deleteUser = useStore((store) => store.deleteUser);
 
   // useEffect(() => {
   //   fetchUsers();
