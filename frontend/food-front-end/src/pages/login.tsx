@@ -18,7 +18,7 @@ function Login() {
     fetchUsers();
   }, []);
 
-  console.log(users);
+  // console.log(users);
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;

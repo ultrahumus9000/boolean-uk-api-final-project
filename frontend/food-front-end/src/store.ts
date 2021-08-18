@@ -19,7 +19,7 @@ export type User = {
   email: string;
 };
 
-type Comment = {
+export type SingleComment = {
   id: number;
   content: string;
   userId: number;
@@ -38,7 +38,7 @@ type PostToTag = {
   postId: number;
 };
 
-type Post = {
+export type SinglePost = {
   id: number;
   date: string;
   text_content: string;
@@ -75,8 +75,8 @@ type updatePost = {
 
 type Store = {
   users: User[];
-  posts: Post[];
-  comments: Comment[];
+  posts: SinglePost[];
+  comments: SingleComment[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
