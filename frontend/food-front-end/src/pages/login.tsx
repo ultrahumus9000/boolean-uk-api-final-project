@@ -18,6 +18,9 @@ function Login() {
     fetchUsers();
   }, []);
 
+  const StoreUser = (username: string) => {
+    localStorage.setItem("username", username);
+  };
   // console.log(users);
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
@@ -41,6 +44,7 @@ function Login() {
       return;
     }
     setActiveUser(activeUserInfo.id);
+    StoreUser(activeUserInfo.username);
     history.push("/posts");
     targetEvent.reset();
   }

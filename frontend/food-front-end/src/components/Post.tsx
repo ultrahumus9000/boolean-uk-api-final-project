@@ -3,18 +3,19 @@ import { useEffect } from "react";
 import useStore, { SinglePost } from "../store";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import { SingleComment } from "../store";
+import { SingleComment, User } from "../store";
 import UserForPost from "./UserForPost";
 type PostProps = {
   post: SinglePost;
+  users: User[];
 };
 
 type Comments = SingleComment[];
 
-function Post({ post }: PostProps) {
+function Post({ post, users }: PostProps) {
   const comments = useStore((store) => store.comments);
   const fetchComments = useStore((store) => store.fetchComments);
-  const users = useStore((store) => store.users);
+
   console.log(users);
   const postUser = users.find((user) => user?.id === post.userId);
   console.log(postUser);
