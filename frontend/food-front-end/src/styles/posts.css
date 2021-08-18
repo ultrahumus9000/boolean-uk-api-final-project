@@ -38,8 +38,7 @@ img.avatar {
 
 h3 {
   display: inline-block;
-  text-align: left;
-  margin-left: 3rem;
+  text-align: center;
   font-size: 2rem;
 }
 
@@ -48,10 +47,6 @@ h3 {
   margin: 3rem;
   grid-template-rows: auto;
 }
-
-
-
-
 
 .post {
 }
