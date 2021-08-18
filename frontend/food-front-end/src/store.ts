@@ -105,18 +105,6 @@ const useStore = create<Store>((set, get) => ({
       .then((users) => set({ users: users }));
   },
 
-  // fetchUserById: (id) => {
-  //   fetch("http://localhost:3000/users/id")
-  //     .then((resp) => resp.json())
-  //     .then((user) => set({ users: user }));
-  // },
-
-  //   fetchUserByUsername: () => {
-  //     fetch("http://localhost:3000/users/username").then((resp) =>
-  //       resp.json().then((username) => console.log(username))
-  //     );
-  //   },
-
   createUser: (data) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
