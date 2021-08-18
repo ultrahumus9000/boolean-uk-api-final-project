@@ -1,4 +1,5 @@
 const { post } = require("../../database");
+const { errorHandler } = require("../helper");
 
 async function getAllposts(req, res) {
   try {
@@ -10,11 +11,13 @@ async function getAllposts(req, res) {
   }
 }
 async function postOnepost(req, res) {
+  console.log("before post 13", req.body);
   try {
     const userInfo = await post.create({
       data: req.body,
     });
     res.json(userInfo);
+    console.log("line 19", userInfo);
   } catch (error) {
     console.log(error);
     res.json(errorHandler(error));
