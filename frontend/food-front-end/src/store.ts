@@ -56,6 +56,10 @@ type newPostForm = {
   address: string | null;
   userId: number;
 };
+type updatePost = {
+  id: number;
+  likes: number;
+};
 // id             Int         @id @default(autoincrement())
 // date           DateTime    @db.Date
 // text_content   String      @default("")
@@ -81,7 +85,7 @@ type Store = {
   deleteUser: (id: number) => void;
   fetchPosts: () => void;
   createPost: (data: newPostForm) => void;
-  updatePost: (data: Post) => void;
+  updatePost: (data: updatePost) => void;
   deletePost: (id: number) => void;
   fetchComments: () => void;
   createComment: (arg: newCommentForm) => void;

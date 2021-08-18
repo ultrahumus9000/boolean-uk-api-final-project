@@ -37,12 +37,13 @@ async function deleteOnepost(req, res) {
 async function updatePost(req, res) {
   const postId = req.params.id;
   try {
-    if (await idExsitingchecker(post, postId)) {
+    const orginalPost = await idExsitingchecker(post, postId);
+    if (orginalPost) {
       const result = await post.update({
         where: {
           id: postId,
         },
-        data: req.body,
+        data: { ...orginalPost, ...req.body },
       });
 
       res.json(result);
