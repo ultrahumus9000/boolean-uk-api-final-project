@@ -62,14 +62,12 @@ type newPostForm = {
 // posttotags     PostToTag[]
 // usersInArchive Archive[]
 
-
 type Store = {
   users: User[];
   posts: Post[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
-
   // fetchUserById: (id: number) => void;
   createUser: (data: newUserFrom) => void;
   updateUser: (data: User) => void;
@@ -77,7 +75,6 @@ type Store = {
   fetchPosts: () => void;
   createPost: (arg: newPostForm) => void;
   deletePost: (id: number) => void;
-
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -99,11 +96,11 @@ const useStore = create<Store>((set, get) => ({
   //     .then((user) => set({ users: user }));
   // },
 
-//   fetchUserByUsername: () => {
-//     fetch("http://localhost:3000/users/username").then((resp) =>
-//       resp.json().then((username) => console.log(username))
-//     );
-//   },
+  //   fetchUserByUsername: () => {
+  //     fetch("http://localhost:3000/users/username").then((resp) =>
+  //       resp.json().then((username) => console.log(username))
+  //     );
+  //   },
 
   createUser: (data) => {
     fetch("http://localhost:3000/users", {
@@ -117,6 +114,7 @@ const useStore = create<Store>((set, get) => ({
       .then((newUser) => set({ users: [...get().users, newUser] }));
   },
   updateUser: (data) => {
+    const id = data.id;
     fetch("http://localhost:3000/users/id", {
       method: "PATCH",
       headers: {
@@ -140,7 +138,6 @@ const useStore = create<Store>((set, get) => ({
       method: "DELETE",
     });
   },
-
 
   fetchPosts: () => {
     fetch("http://localhost:3000/posts")
