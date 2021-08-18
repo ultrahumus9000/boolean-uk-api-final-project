@@ -80,7 +80,7 @@ type Store = {
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
-  // fetchUserById: (id: number) => void;
+  // fetchUserById: (id: Number) => void;
   createUser: (data: newUserFrom) => void;
   updateUser: (data: User) => void;
   deleteUser: (id: number) => void;
@@ -95,6 +95,7 @@ type Store = {
 
 const useStore = create<Store>((set, get) => ({
   users: [],
+  // user: {},
   posts: [],
   comments: [],
   activeUser: 0,
@@ -105,6 +106,12 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((users) => set({ users: users }));
   },
+
+  // fetchUserById: () => {
+  //   fetch("http://localhost:3000/users/activeUser")
+  //     .then((resp) => resp.json())
+  //     .then((user) => set({ user: user }));
+  // },
 
   createUser: (data) => {
     fetch("http://localhost:3000/users", {
