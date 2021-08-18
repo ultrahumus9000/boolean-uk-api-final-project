@@ -9,7 +9,7 @@ type newUserFrom = {
   email: string;
 };
 
-type User = {
+export type User = {
   id: number;
   first_name: string;
   last_name: string;
@@ -60,6 +60,7 @@ type updatePost = {
   id: number;
   likes: number;
 };
+
 // id             Int         @id @default(autoincrement())
 // date           DateTime    @db.Date
 // text_content   String      @default("")

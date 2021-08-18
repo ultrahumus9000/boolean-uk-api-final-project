@@ -1,6 +1,7 @@
 const e = require("express");
 const { user, archive } = require("../../database");
 const { errorHandler, idExsitingchecker } = require("../helper");
+
 async function getAllUser(req, res) {
   try {
     const result = await user.findMany({});
@@ -10,7 +11,6 @@ async function getAllUser(req, res) {
     res.json(errorHandler(error));
   }
 }
-
 async function postOneUser(req, res) {
   try {
     const userInfo = await user.create({
@@ -68,7 +68,6 @@ async function deleteOneUser(req, res) {
 
 module.exports = {
   getAllUser,
-  getOneUser,
   postOneUser,
   editUserProfile,
   deleteOneUser,
