@@ -1,11 +1,17 @@
+const e = require("express");
 const { user, archive } = require("../../database");
 const { errorHandler, idExsitingchecker } = require("../helper");
-async function getAllUser(req, res) {}
-
-async function getOneUser(req, res) {}
+async function getAllUser(req, res) {
+  try {
+    const result = await user.findMany({});
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
 
 async function postOneUser(req, res) {
-  console.log("postuser", req.body);
   try {
     const userInfo = await user.create({
       data: req.body,
@@ -25,7 +31,26 @@ async function postOneUser(req, res) {
   }
 }
 
-async function editUserProfile(req, res) {}
+async function editUserProfile(req, res) {
+  const userId = req.params.id;
+  try {
+    if (await idExsitingchecker(user, userId)) {
+      const result = await user.update({
+        where: {
+          id: userId,
+        },
+        data: req.body,
+      });
+
+      res.json(result);
+    } else {
+      res.json("there isnt the user you provided");
+    }
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
 
 async function deleteOneUser(req, res) {
   const id = Number(req.params.id);
