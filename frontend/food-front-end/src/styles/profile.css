@@ -1,32 +1,49 @@
 main.profile-page {
   display: grid;
-  grid-template-rows: 150px auto;
+  grid-template-rows: 300px auto;
   align-items: center;
   justify-items: center;
   height: 100vh;
 }
 
-h2.edit-profile-title {
-    font-size: 2rem;
-    font-weight: bold;
-    align-self: end;
-}
-
-form.edit-profile-form {
+div.profile-to-edit {
   display: grid;
-  background-color: cornsilk;
-  grid-template-rows: auto;
+  grid-template-rows: 400px auto;
   gap: 10px;
-  padding: 3rem;
-  border-radius: 10px;
 }
 
-label.edit-profile-label {
-    font-weight: bold;
+div.edit-avatar {
+  display: grid;
+  grid-template-columns: 100px auto;
+  place-items: center;
+  gap: 20px;
+  width: 10rem;
+}
+
+div.edit-element {
+  display: grid;
+  grid-template-columns: auto 100px;
+  font-weight: bold;
+}
+
+h2.edit-profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  align-self: end;
+}
+
+button.edit-profile {
+  display: inline-block;
+  justify-self: right;
+  width: 50px;
+  height: 20px;
+  justify-self: end;
+  font-size: 0.75rem;
 }
 
 button.edit-profile-submit {
+    width: 100px;
+    height: 30px;
+    background-color: crimson;
     justify-self: right;
-    width: 150px;
-
 }
