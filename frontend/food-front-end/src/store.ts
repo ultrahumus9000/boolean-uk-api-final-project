@@ -26,11 +26,17 @@ type Comment = {
   postId: number;
 };
 
-// type PostToTag = {
-//   id: number;
-//   tagId: number;
-//   postId: number;
-// };
+type newCommentForm = {
+  content: string;
+  userId: number;
+  postId: number;
+};
+
+type PostToTag = {
+  id: number;
+  tagId: number;
+  postId: number;
+};
 
 type Post = {
   id: number;
@@ -65,6 +71,7 @@ type newPostForm = {
 type Store = {
   users: User[];
   posts: Post[];
+  comments: Comment[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
@@ -73,14 +80,18 @@ type Store = {
   updateUser: (data: User) => void;
   deleteUser: (id: number) => void;
   fetchPosts: () => void;
-  createPost: (arg: newPostForm) => void;
+  createPost: (data: newPostForm) => void;
+  updatePost: (data: Post) => void;
   deletePost: (id: number) => void;
+  fetchComments: () => void;
+  createComment: (arg: newCommentForm) => void;
+  deleteComment: (id: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
   users: [],
   posts: [],
-
+  comments: [],
   activeUser: 0,
   setActiveUser: (userId) => set({ activeUser: userId }),
 
@@ -125,7 +136,7 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((data) => {
         let updatedUsers = get().users.map((user) => {
-          if (user.id === data.id) {
+          if (user.id === id) {
             return data;
           }
           return user;
@@ -159,8 +170,52 @@ const useStore = create<Store>((set, get) => ({
         set({ posts: [...get().posts, newPostFromSever] })
       );
   },
+  updatePost: (data) => {
+    const id = data.id;
+    fetch("http://localhost:3000/posts/id", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        let updatedPosts = get().posts.map((post) => {
+          if (post.id === id) {
+            return data;
+          }
+          return post;
+        });
+        set({ posts: updatedPosts });
+      });
+  },
   deletePost: (id) => {
     fetch("http://localhost:3000/posts/id", {
+      method: "DELETE",
+    });
+  },
+  fetchComments: () => {
+    fetch("http://localhost:3000/comments")
+      .then((resp) => resp.json())
+      .then((commentsFromServer) => set({ comments: commentsFromServer }));
+  },
+  createComment: (data) => {
+    fetch("http://localhost:3000/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => resp.json())
+
+      .then((newCommentFromSever) =>
+        set({ comments: [...get().comments, newCommentFromSever] })
+      );
+  },
+  deleteComment: (id) => {
+    fetch("http://localhost:3000/comments/id", {
       method: "DELETE",
     });
   },
