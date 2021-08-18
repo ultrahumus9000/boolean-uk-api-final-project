@@ -21,7 +21,7 @@ function NewPostForm() {
 
   return (
     <form className="post_form" onSubmit={handleSubmit}>
-      <h3>Create new post:</h3>
+      <h3 className="post_form_heading">Create new post:</h3>
       <label>
         Photo:
         <input type="text" name="picture" required />
@@ -34,9 +34,18 @@ function NewPostForm() {
         Address:
         <input type="text" name="address" required />
       </label>
+      <label>
+        Date:
+        <input type="text" name="date" required />
+      </label>
 
       <Link to="/posts">
-        <input className="post_submit" type="submit" value="Submit" required />
+        <input
+          className="new_post_submit"
+          type="submit"
+          value="Submit"
+          required
+        />
       </Link>
     </form>
   );
