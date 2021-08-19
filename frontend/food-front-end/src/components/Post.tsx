@@ -31,7 +31,12 @@ function Post({ post, users }: PostProps) {
   return (
     <article className="post">
       <UserForPost postUser={postUser} />
-      <img className="post_picture" src={post.picture} alt="foopicture"></img>
+      <img
+        className="post_picture"
+        src={post.picture}
+        alt="foopicture"
+        // onClick={}
+      ></img>
       <div className="post_info">
         <p>{post.text_content}</p>
         <p>{post.address}</p>

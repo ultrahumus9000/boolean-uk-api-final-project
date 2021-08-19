@@ -8,17 +8,14 @@ type HeaderProp = {
 };
 
 function Header({ users, savedInfo }: HeaderProp) {
-  // const activeUserId = useStore((store) => store.activeUser);
-
-  // const activeUserInfo = users.find((user) => user?.id === activeUserId);
-
+  const [newPost, setNewPost] = useState(true);
   return (
     <header>
       <div className="profile">
         <img className="avatar" src={savedInfo?.avatar} alt="user avatar"></img>
         <h3 className="name">{savedInfo?.username}</h3>
       </div>
-      <NewPostForm />
+      {newPost && <NewPostForm />}
     </header>
   );
 }

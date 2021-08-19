@@ -1,5 +1,12 @@
 section.signup {
-    background: url("https://i.pinimg.com/736x/48/33/a1/4833a159996e2d0e982dfa3d6fbf7c0a.jpg");
-    height: 100vh;
-    display: flex;
-  }
+  background: url("https://i.pinimg.com/736x/48/33/a1/4833a159996e2d0e982dfa3d6fbf7c0a.jpg");
+  height: 100vh;
+  display: flex;
+}
+
+.form-title {
+  display: grid;
+  grid-template-columns: 60px auto;
+  align-items: center;
+  justify-content: center;
+}
