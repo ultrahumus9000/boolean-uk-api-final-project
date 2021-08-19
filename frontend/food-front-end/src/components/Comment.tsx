@@ -19,7 +19,6 @@ function Comment({ comment }: CommentProp) {
         src={commentUserInfo?.avatar}
         alt="username"
       ></img>
-      <p className="username">{commentUserInfo?.username}</p>
     </article>
   );
 }

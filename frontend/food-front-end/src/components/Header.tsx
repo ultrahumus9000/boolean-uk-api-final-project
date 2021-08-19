@@ -14,7 +14,12 @@ function Header({ users, savedInfo }: HeaderProp) {
       <div className="profile">
         <img className="avatar" src={savedInfo?.avatar} alt="user avatar"></img>
         <h3 className="name">{savedInfo?.username}</h3>
+        <div className="head-buttons">
+          <button>Edit Profile</button>
+          <button className="crimsion-color">Post New</button>
+        </div>
       </div>
+
       {newPost && <NewPostForm />}
     </header>
   );

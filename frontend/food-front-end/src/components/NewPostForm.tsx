@@ -11,8 +11,6 @@ function NewPostForm() {
 
   const createPost = useStore((store) => store.createPost);
 
-  const activeUser = useStore((store) => store.activeUser);
-
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
@@ -27,7 +25,6 @@ function NewPostForm() {
     };
 
     createPost(newPost);
-    console.log(newPost);
     targetEvent.reset();
   }
 

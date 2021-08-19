@@ -11,27 +11,44 @@ body {
 header {
   display: flex;
 }
+.head-buttons {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-area: buttons;
+  gap: 5px;
+  padding: 10px;
+}
+.head-buttons .crimsion-color {
+  background-color: tomato;
+}
 .post_page {
   width: 100vw;
   overflow: scroll;
 }
 .profile {
   display: grid;
-  grid-template-columns: 125px auto;
+  grid-template:
+    "avatar name" 100px
+    "buttons buttons" 30px/
+    70px auto;
   background-color: #00000020;
   border-radius: 30px;
   width: 20rem;
   height: 10rem;
   margin: 3rem;
   align-items: center;
+  gap: 10px;
 }
-
+h3.name {
+  grid-area: name;
+}
 img.avatar {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
   margin: 1rem;
+  grid-area: avatar;
 }
 
 h3 {
@@ -42,14 +59,12 @@ h3 {
 
 .feed {
   column-count: 3;
-  column-gap: 0px;
   padding: 5rem;
   row-gap: 20px;
 }
 
 article.post {
   display: grid;
-  /* display: inline-block; */
   grid-template-rows: auto;
   justify-content: center;
   position: relative;
@@ -61,6 +76,7 @@ article.post {
   border: 4px solid rgb(248, 228, 190);
   gap: 5px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .post-user {
@@ -120,7 +136,6 @@ svg {
 .comment_form {
   display: grid;
   grid-template-columns: 260px 1fr;
-  /* align-items: center; */
   justify-self: center;
 }
 .comment-label {
@@ -146,27 +161,22 @@ svg {
 .comment {
   background-color: antiquewhite;
   display: grid;
-  grid-template:
-    "comment_content comment_content post_avatar" 50px
-    "comment_content comment_content username" auto/
-    100px 100px auto;
 
   margin: 1rem;
-  padding: 2rem;
   border-radius: 20px;
   place-items: center;
-}
-
-.comment_content {
-  grid-area: comment_content;
+  position: relative;
 }
 
 img.post_avatar {
   grid-area: post_avatar;
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 30px;
+  height: 30px;
   object-fit: cover;
+  position: absolute;
+  right: -5px;
+  bottom: 0px;
 }
 
 .username {
