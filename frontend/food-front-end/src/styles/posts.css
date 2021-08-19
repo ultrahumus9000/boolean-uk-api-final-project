@@ -68,7 +68,11 @@ h3 {
   text-align: center;
   font-size: 2rem;
 }
-
+.address-p {
+  display: grid;
+  grid-template-columns: 50px auto;
+  align-items: center;
+}
 .feed-mason {
   column-count: 4;
   margin: 50px auto;
@@ -135,6 +139,9 @@ article.post {
   object-fit: contain;
   margin: 5px;
   border-radius: 20px;
+}
+.post_picture:hover {
+  filter: contrast(1.5);
 }
 
 .post_info {
