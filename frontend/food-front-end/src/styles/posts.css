@@ -3,10 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  background-image: url("https://preview.pixlr.com/images/800wm/100/1/1001152062.jpg");
-  background-color: none;
-}
 
 header {
   display: flex;
@@ -73,6 +69,12 @@ h3 {
   font-size: 2rem;
 }
 
+.feed-mason {
+  column-count: 4;
+  margin: 50px auto;
+  overflow: scroll;
+  padding: 10px 50px;
+}
 .feed {
   display: flex;
   flex-wrap: wrap;
@@ -94,7 +96,9 @@ article.post {
   gap: 5px;
   font-weight: bold;
   margin-bottom: 10px;
+
   flex: 1 0 33%;
+  z-index: 1;
 }
 
 .post-user {
@@ -129,15 +133,14 @@ article.post {
   height: 100%;
   align-self: center;
   object-fit: contain;
-  margin: auto;
+  margin: 5px;
   border-radius: 20px;
-  border: 7px solid teal;
 }
 
 .post_info {
-  margin-left: 4rem;
   display: grid;
   grid-template-rows: auto;
+  margin-left: 2rem;
   gap: 5px;
 }
 
@@ -170,12 +173,17 @@ svg {
   width: 60px;
   height: 50px;
   border-radius: 10px;
-  background-color: azure;
+  background-color: indianred;
   font-weight: bolder;
   border: none;
   margin-right: 10px;
 }
-
+.comment-submit:active {
+  filter: saturate(1.2);
+}
+.comment-submit:hover {
+  filter: saturate(2);
+}
 .comment {
   background-color: antiquewhite;
   display: grid;
@@ -221,8 +229,8 @@ img.post_avatar {
   header {
     flex-direction: column;
   }
-  .feed {
-    column-count: 2;
+  .feed-mason {
+    column-count: 3;
   }
 }
 
@@ -240,7 +248,12 @@ img.post_avatar {
   .profile {
     width: 15rem;
   }
-  .feed {
+  .feed-mason {
+    column-count: 2;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .feed-mason {
     column-count: 1;
   }
 }
