@@ -8,11 +8,6 @@ body {
   background-color: none;
 }
 
-main.post_page {
-  /* height: 100%;
-  width: 100%; */
-}
-
 header {
   display: flex;
 }
@@ -45,31 +40,55 @@ h3 {
 .feed {
   display: grid;
   margin: 3rem;
+  width: 100vw;
   grid-template-rows: auto;
-}
-
-section.feed {
-  display: grid;
-  grid-template-rows: auto;
-  margin: 5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 500px));
+  gap: 10px;
 }
 
 article.post {
   display: grid;
   grid-template-rows: auto;
-  border: black solid 1px;
-  width: 30rem;
-  padding: 2rem 1rem;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
   border-radius: 10px;
   background-color: lightsalmon;
-  gap: 10px;
+  border: 4px solid rgb(248, 228, 190);
+  gap: 5px;
   font-weight: bold;
 }
 
+.post-user {
+  display: grid;
+  position: absolute;
+  left: -20px;
+  top: -20px;
+  align-content: center;
+  height: 60px;
+  z-index: 1;
+}
+
+.postuser-avatar {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50px;
+  border: 4px darkcyan dotted;
+}
+.postuser-name {
+  background-color: darkcyan;
+  text-align: center;
+  color: white;
+  border-radius: 3px;
+  padding: 2px;
+}
+
 .post_picture {
-  width: 400px;
+  width: 350px;
+  height: 100%;
   align-self: center;
-  height: 400px;
   object-fit: contain;
   margin: auto;
 }
