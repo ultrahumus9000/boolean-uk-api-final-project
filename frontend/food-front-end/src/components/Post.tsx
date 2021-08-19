@@ -3,21 +3,21 @@ import { useEffect } from "react";
 import useStore, { SinglePost } from "../store";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import { SingleComment } from "../store";
+import { SingleComment, User } from "../store";
 import UserForPost from "./UserForPost";
 type PostProps = {
   post: SinglePost;
+  users: User[];
 };
 
 type Comments = SingleComment[];
 
-function Post({ post }: PostProps) {
+function Post({ post, users }: PostProps) {
   const comments = useStore((store) => store.comments);
   const fetchComments = useStore((store) => store.fetchComments);
-  const users = useStore((store) => store.users);
-  console.log(users);
+
   const postUser = users.find((user) => user?.id === post.userId);
-  console.log(postUser);
+  //   console.log(postUser);
   useEffect(() => {
     fetchComments();
   }, [comments.length]);
@@ -31,7 +31,12 @@ function Post({ post }: PostProps) {
   return (
     <article className="post">
       <UserForPost postUser={postUser} />
-      <img className="post_picture" src={post.picture} alt="foopicture"></img>
+      <img
+        className="post_picture"
+        src={post.picture}
+        alt="foopicture"
+        // onClick={}
+      ></img>
       <div className="post_info">
         <p>{post.text_content}</p>
         <p>{post.address}</p>

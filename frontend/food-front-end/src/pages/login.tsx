@@ -18,6 +18,11 @@ function Login() {
     fetchUsers();
   }, []);
 
+  const activeUserInfo = users.find((user) => user?.id === activeUser);
+
+  const StoreUser = (info: string) => {
+    localStorage.setItem("userInfo", info);
+  };
   // console.log(users);
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
@@ -41,6 +46,7 @@ function Login() {
       return;
     }
     setActiveUser(activeUserInfo.id);
+    StoreUser(JSON.stringify(activeUserInfo));
     history.push("/posts");
     targetEvent.reset();
   }
