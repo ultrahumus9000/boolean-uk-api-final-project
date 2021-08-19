@@ -1,9 +1,18 @@
 import React, { useReducer } from "react";
+import { useState } from "react";
 
 import "../styles/profile.css";
 import useStore from "../store";
 
+import EditProfileForm from "../components/EditProfileForm"
+
 function Profile() {
+  const [editForm, setEditForm] = useState(false);
+
+  function handleClick() {
+     const editForm = true
+  }
+
   return (
     <main className="profile-page">
       <h2 className="edit-profile-title">Your profile:</h2>
@@ -31,9 +40,12 @@ function Profile() {
           <p>email</p>
         </div>
         <div className="edit-profile-buttons">
-          <button className="edit-profile">Edit</button>
+          <button className="edit-profile" onClick={handleClick}>
+            Edit
+          </button>
         </div>
       </div>
+      {editForm && <EditProfileForm />}
     </main>
   );
 }

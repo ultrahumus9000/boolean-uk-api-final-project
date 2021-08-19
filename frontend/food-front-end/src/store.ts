@@ -81,12 +81,12 @@ type Store = {
   comments: SingleComment[];
   activeUser: number;
   setActiveUser: (arg: number) => void;
-  fetchUsers: () => void;
+  // fetchUsers: () => void;
   // fetchUserById: (id: Number) => void;
   createUser: (data: newUserFrom) => void;
   updateUser: (data: User) => void;
   deleteUser: (id: number) => void;
-  fetchPosts: () => void;
+  // fetchPosts: () => void;
   createPost: (data: newPostForm) => void;
   updatePost: (data: updatePost) => void;
   deletePost: (id: number) => void;
@@ -103,11 +103,11 @@ const useStore = create<Store>((set, get) => ({
   activeUser: 0,
   setActiveUser: (userId) => set({ activeUser: userId }),
 
-  fetchUsers: () => {
-    fetch("http://localhost:3000/users")
-      .then((resp) => resp.json())
-      .then((users) => set({ users: users }));
-  },
+  // fetchUsers: () => {
+  //   fetch("http://localhost:3000/users")
+  //     .then((resp) => resp.json())
+  //     .then((users) => set({ users: users }));
+  // },
 
   // fetchUserById: () => {
   //   fetch("http://localhost:3000/users/activeUser")
@@ -152,11 +152,11 @@ const useStore = create<Store>((set, get) => ({
     });
   },
 
-  fetchPosts: () => {
-    fetch("http://localhost:3000/posts")
-      .then((resp) => resp.json())
-      .then((postsFromServer) => set({ posts: postsFromServer }));
-  },
+  // fetchPosts: () => {
+  //   fetch("http://localhost:3000/posts")
+  //     .then((resp) => resp.json())
+  //     .then((postsFromServer) => set({ posts: postsFromServer }));
+  // },
 
   createPost: (data) => {
     fetch("http://localhost:3000/posts", {
