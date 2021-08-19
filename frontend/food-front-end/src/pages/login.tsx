@@ -18,7 +18,7 @@ function Login() {
     fetchUsers();
   }, []);
 
-  const activeUserInfo = users.find((user) => user?.id === activeUser);
+  // const activeUserInfo = users.find((user) => user?.id === activeUser);
 
   const StoreUser = (info: string) => {
     localStorage.setItem("userInfo", info);
