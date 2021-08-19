@@ -26,12 +26,6 @@ function CommentForm({ postId }: IdProps) {
     targetEvent.reset();
   }
 
-  console.log("line 29", savedInfo.id);
-  //   type newCommentForm = {
-  //     content: string;
-  //     userId: number;
-  //     postId: number;
-  //   };
   return (
     <form className="comment_form" onSubmit={handleSubmit}>
       <label className="comment-label">

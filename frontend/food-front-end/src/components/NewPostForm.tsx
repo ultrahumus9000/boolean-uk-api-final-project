@@ -1,11 +1,15 @@
 import React, { SyntheticEvent } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import useStore, { User } from "../store";
 import "../styles/new_post_form.css";
 
 function NewPostForm() {
-  // const toggleaddress = useState(true);
+  const [addressStatus, setAddressStatus] = useState(false);
+
+  function toggleAddress() {
+    setAddressStatus(!addressStatus);
+  }
+
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
@@ -14,13 +18,19 @@ function NewPostForm() {
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
+    let newAddress = "";
+    if (addressStatus) {
+      newAddress = targetEvent.address.value;
+    } else {
+      newAddress = "";
+    }
 
     let newPost = {
       date: new Date().toISOString(),
       likes: 0,
       picture: targetEvent.picture.value,
       text_content: targetEvent.text_content.value,
-      address: targetEvent.address.value,
+      address: newAddress,
       userId: savedInfo.id,
     };
 
@@ -39,10 +49,16 @@ function NewPostForm() {
         Text:
         <input type="text" name="text_content" required />
       </label>
-      <label>
-        Address:
-        <input type="text" name="address" required />
-      </label>
+      <button className="add-btn" onClick={toggleAddress}>
+        {" "}
+        add address{" "}
+      </button>
+      {addressStatus ? (
+        <label>
+          Address:
+          <input type="text" name="address" />
+        </label>
+      ) : null}
 
       <input
         className="new_post_submit"

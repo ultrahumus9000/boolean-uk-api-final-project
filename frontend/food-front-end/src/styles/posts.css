@@ -10,6 +10,22 @@ body {
 
 header {
   display: flex;
+  height: fit-content;
+  position: relative;
+}
+.shorter-header {
+  max-height: 150px;
+}
+.logout-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: transparent;
+  height: 100px;
+  width: 100px;
+  background-image: url("../assets/cutebread.svg");
+  object-fit: contain;
+  z-index: 1;
 }
 .head-buttons {
   display: grid;

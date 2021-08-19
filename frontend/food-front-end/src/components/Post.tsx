@@ -40,7 +40,6 @@ function Post({ post, users }: PostProps) {
       <div className="post_info">
         <p>{post.text_content}</p>
         <p>{post.address}</p>
-        <p>{post.likes}</p>
         <div className="likes">
           <svg
             version="1.1"

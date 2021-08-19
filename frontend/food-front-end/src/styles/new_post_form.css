@@ -1,8 +1,8 @@
 .post_form {
   display: grid;
-  grid-template-rows: auto repeat(6, 50px) 1fr;
+  grid-template-rows: auto repeat(3, 50px);
   margin-left: 5rem;
-  background-color: rgb(212, 108, 129);
+  background-color: pink;
   border-radius: 10px;
   padding: 1rem;
   margin-top: 2rem;
@@ -25,7 +25,9 @@ label {
   font-size: 1rem;
   display: block;
 }
-
+.add-btn {
+  background-color: tomato;
+}
 .new_post_submit {
   border-radius: 5px;
   padding: 5px 10px;
@@ -38,4 +40,14 @@ label {
   border-radius: 10px;
   font-size: 1.5rem;
   font-weight: bold;
+  background: linear-gradient(20deg, slateblue, lightseagreen);
+  color: aliceblue;
+}
+.new_post_submit:hover {
+  filter: contrast(1.5);
+  transform: scale(1.1);
+}
+.new_post_submit:active {
+  filter: contrast(1.5);
+  transform: scale(1.1);
 }
