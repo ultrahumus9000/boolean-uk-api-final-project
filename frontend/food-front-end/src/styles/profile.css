@@ -1,9 +1,15 @@
-main.profile-page {
+/* main.profile-page {
   display: grid;
   grid-template-rows: 100px 1fr;
   align-items: center;
   justify-items: center;
   height: 100vh;
+} */
+
+.profile-page-big {
+  height: 100vh;
+  display: block;
+  padding: auto;
 }
 
 h2.edit-profile-title {

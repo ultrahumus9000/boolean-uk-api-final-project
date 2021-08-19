@@ -10,20 +10,21 @@ import useStore from "../store";
 function Login() {
   const history = useHistory();
   const users = useStore((store) => store.users);
-  // const fetchUsers = useStore((store) => store.fetchUsers);
+  const fetchUsers = useStore((store) => store.fetchUsers);
   const setActiveUser = useStore((store) => store.setActiveUser);
   const activeUser = useStore((store) => store.activeUser);
 
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const activeUserInfo = users.find((user) => user?.id === activeUser);
 
   const StoreUser = (info: string) => {
     localStorage.setItem("userInfo", info);
   };
-  // console.log(users);
+
+  console.log(localStorage.getItem("userInfo"));
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
@@ -47,6 +48,7 @@ function Login() {
     }
     setActiveUser(activeUserInfo.id);
     StoreUser(JSON.stringify(activeUserInfo));
+    console.log(activeUserInfo);
     history.push("/posts");
     targetEvent.reset();
   }
