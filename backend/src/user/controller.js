@@ -67,9 +67,35 @@ async function deleteOneUser(req, res) {
   }
 }
 
+async function checkUser(req, res) {
+  const { username, password } = req.body;
+  try {
+    const result = await user.findUnique({
+      where: {
+        username,
+      },
+    });
+    if (result === null) {
+      res.json("username is not valid");
+    } else {
+      let passwordChecker = password === result.password;
+      if (!passwordChecker) {
+        res.json("password doesnt match the account");
+      } else {
+        res.json(result);
+        console.log(result);
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
+
 module.exports = {
   getAllUser,
   postOneUser,
   editUserProfile,
   deleteOneUser,
+  checkUser,
 };

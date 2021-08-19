@@ -1,5 +1,5 @@
 const { post } = require("../../database");
-const { errorHandler } = require("../helper");
+const { errorHandler, idExsitingchecker } = require("../helper");
 
 async function getAllposts(req, res) {
   try {
@@ -25,12 +25,14 @@ async function postOnepost(req, res) {
 }
 async function deleteOnepost(req, res) {
   const id = Number(req.params.id);
+  console.log(id);
   try {
     await post.delete({
       where: {
         id,
       },
     });
+    res.json("deleted!!!!!!!");
   } catch (error) {
     console.log(error);
     res.json(errorHandler(error));
@@ -38,7 +40,8 @@ async function deleteOnepost(req, res) {
 }
 
 async function updatePost(req, res) {
-  const postId = req.params.id;
+  const postId = Number(req.params.id);
+  console.log("update post", req.body);
   try {
     const orginalPost = await idExsitingchecker(post, postId);
     if (orginalPost) {

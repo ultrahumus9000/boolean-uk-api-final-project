@@ -7,7 +7,7 @@ const {
   updatePost,
 } = require("./controller");
 postRouter.get("/", getAllposts);
-// postRouter.get("/:id", getOnepost);
+
 postRouter.post("/", postOnepost);
 postRouter.patch("/:id", updatePost);
 postRouter.delete("/:id", deleteOnepost);

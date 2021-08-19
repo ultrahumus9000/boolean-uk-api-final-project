@@ -8,6 +8,11 @@ import { useEffect } from "react";
 import useStore from "../store";
 import Headline from "../components/Headline";
 
+type CheckUser = {
+  username: string;
+  password: string;
+};
+
 function Login() {
   const history = useHistory();
   const users = useStore((store) => store.users);
@@ -21,11 +26,14 @@ function Login() {
 
   // const activeUserInfo = users.find((user) => user?.id === activeUser);
 
+  function frontendCheckUser(data: CheckUser) {}
+
   const StoreUser = (info: string) => {
     localStorage.setItem("userInfo", info);
   };
 
   console.log(localStorage.getItem("userInfo"));
+
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;

@@ -7,7 +7,6 @@ import Post from "../components/Post";
 import useStore from "../store";
 import { useEffect } from "react";
 import Headline from "../components/Headline";
-import Masonry from "react-masonry-css";
 
 function Posts() {
   const comments = useStore((store) => store.comments);

@@ -5,9 +5,11 @@ const {
   postOneUser,
   editUserProfile,
   deleteOneUser,
+  checkUser,
 } = require("./controller");
 userRouter.get("/", getAllUser);
 userRouter.post("/", postOneUser);
+userRouter.post("/user", checkUser);
 userRouter.patch("/:id", editUserProfile);
 userRouter.delete("/:id", deleteOneUser);
 

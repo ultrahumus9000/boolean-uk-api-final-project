@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import useStore, { SinglePost } from "../store";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SingleComment, User } from "../store";
 import UserForPost from "./UserForPost";
+
+// type UpdatePost = {
+//   id: number;
+//   likes: number;
+// };
 
 type PostProps = {
   post: SinglePost;
@@ -17,7 +22,9 @@ type Comments = SingleComment[];
 
 function Post({ post, users, display, handleDisplay }: PostProps) {
   const comments = useStore((store) => store.comments);
-
+  const updatePost = useStore((store) => store.updatePost);
+  const [click, setClick] = useState(true);
+  const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
   const postUser = users.find((user) => user?.id === post.userId);
 
@@ -25,15 +32,65 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
     fetchComments();
   }, [comments.length]);
 
+  const data = localStorage.getItem("userInfo");
+  const savedInfo = JSON.parse(data === null ? "" : data);
+
   let matchedComments: Comments = [];
 
   if (comments.length !== 0) {
     matchedComments = comments.filter((comment) => comment.postId === post.id);
   }
+  let checker = post.userId === savedInfo.id;
+
+  function handleDelete() {
+    deletePost(post.id);
+  }
+
+  function changeLike() {
+    setClick(!click);
+    console.log("click", click);
+
+    if (click) {
+      let updateInfo = {
+        id: post.id,
+        likes: post.likes + 1,
+      };
+
+      updatePost(updateInfo);
+    } else {
+      let updateInfo = {
+        id: post.id,
+        likes: post.likes - 1,
+      };
+      updatePost(updateInfo);
+    }
+  }
 
   return (
     <article className={`${display ? "post" : "non-back"}`}>
       {display ? <UserForPost postUser={postUser} /> : null}
+      {display ? (
+        checker ? (
+          <svg
+            onClick={handleDelete}
+            className="delete-btn"
+            width="40px"
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 128 128"
+          >
+            <title>{"x"}</title>
+            <path
+              d="M17.662 21.885l45.723 8.94 45.722 8.942a1.559 1.559 0 001.828-1.23 10.152 10.152 0 00-8.016-11.913l-15.172-2.967.797-4.073a11.11 11.11 0 00-8.761-13.02l-22.449-4.39a11.11 11.11 0 00-13.02 8.76l-.797 4.074-15.172-2.967a10.152 10.152 0 00-11.913 8.016 1.559 1.559 0 001.23 1.828zM60.067 9.824L74.37 12.62a8.264 8.264 0 016.524 9.697l-15.26-2.984-15.262-2.985a8.264 8.264 0 019.696-6.524z"
+              fill="#2e79bd"
+            />
+            <path
+              d="M110.588 47.362H17.412a1.559 1.559 0 00-1.558 1.557v5.91c0 .86 16.143 61.052 16.143 61.052a11.081 11.081 0 0011.039 10.153h41.928a11.081 11.081 0 0011.04-10.153s16.142-60.193 16.142-61.052v-5.91a1.559 1.559 0 00-1.558-1.557zM48.654 111.58a2.608 2.608 0 01-3.196-1.848c-4.443-16.614-8.96-33.53-11.916-44.73a2.61 2.61 0 115.049-1.332c2.954 11.191 7.47 28.104 11.91 44.713a2.61 2.61 0 01-1.847 3.197zm17.954-2.522a2.611 2.611 0 01-5.222 0V64.337a2.611 2.611 0 015.222 0zm27.85-44.056c-3.09 11.706-7.99 30.053-11.916 44.73a2.61 2.61 0 11-5.044-1.349c3.924-14.673 8.823-33.015 11.91-44.713a2.61 2.61 0 115.05 1.332z"
+              fill="#2d3e50"
+            />
+          </svg>
+        ) : null
+      ) : null}
       <img
         className="post_picture"
         src={post.picture}
@@ -107,7 +164,7 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
               </p>
             ) : null}
 
-            <div className="likes">
+            <div className="likes" onClick={changeLike}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90">
                 <title>{"carrot"}</title>
                 <g data-name="carrot">

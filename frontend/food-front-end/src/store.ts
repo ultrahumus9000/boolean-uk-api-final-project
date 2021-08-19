@@ -108,12 +108,6 @@ const useStore = create<Store>((set, get) => ({
       .then((users) => set({ users: users }));
   },
 
-  // fetchUserById: () => {
-  //   fetch("http://localhost:3000/users/activeUser")
-  //     .then((resp) => resp.json())
-  //     .then((user) => set({ user: user }));
-  // },
-
   createUser: (data) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
@@ -148,6 +142,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   deleteUser: (id) => {
+    id = Number(id);
     fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
     });
@@ -175,6 +170,7 @@ const useStore = create<Store>((set, get) => ({
   },
   updatePost: (data) => {
     const id = data.id;
+    console.log("update post", data);
     fetch(`http://localhost:3000/posts/${id}`, {
       method: "PATCH",
       headers: {
@@ -194,8 +190,14 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   deletePost: (id) => {
+    id = Number(id);
     fetch(`http://localhost:3000/posts/${id}`, {
       method: "DELETE",
+    }).then(() => {
+      console.log("deleted!!!");
+      const updatedPosts = get().posts.filter((post) => post.id !== id);
+      console.log(updatedPosts);
+      set({ posts: updatedPosts });
     });
   },
   fetchComments: () => {
@@ -220,7 +222,7 @@ const useStore = create<Store>((set, get) => ({
   deleteComment: (id) => {
     fetch(`http://localhost:3000/comments/${id}`, {
       method: "DELETE",
-    });
+    }).then(() => {});
   },
 }));
 
