@@ -18,8 +18,10 @@ function Login() {
     fetchUsers();
   }, []);
 
-  const StoreUser = (username: string) => {
-    localStorage.setItem("username", username);
+  const activeUserInfo = users.find((user) => user?.id === activeUser);
+
+  const StoreUser = (info: string) => {
+    localStorage.setItem("userInfo", info);
   };
   // console.log(users);
   function handleSubmit(event: SyntheticEvent) {
@@ -44,7 +46,7 @@ function Login() {
       return;
     }
     setActiveUser(activeUserInfo.id);
-    StoreUser(activeUserInfo.username);
+    StoreUser(JSON.stringify(activeUserInfo));
     history.push("/posts");
     targetEvent.reset();
   }

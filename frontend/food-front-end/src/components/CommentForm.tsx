@@ -8,7 +8,7 @@ function CommentForm({ postId }: IdProps) {
   const activeUser = useStore((store) => store.activeUser);
   const createComment = useStore((store) => store.createComment);
 
-  console.log(postId);
+  //   console.log(postId);
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;

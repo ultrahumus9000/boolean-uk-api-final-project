@@ -19,10 +19,12 @@ function Posts() {
     fetchPosts();
   }, [posts.length, comments.length]);
 
-  console.log(posts);
+  const data = localStorage.getItem("userInfo");
+  const savedInfo = JSON.parse(data === null ? "" : data);
+
   return (
     <main className="post_page">
-      <Header users={users} />
+      <Header users={users} savedInfo={savedInfo} />
       <section className="feed">
         {posts.map((post) => {
           return <Post key={post.id} post={post} users={users} />;

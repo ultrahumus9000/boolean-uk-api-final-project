@@ -16,9 +16,8 @@ function Post({ post, users }: PostProps) {
   const comments = useStore((store) => store.comments);
   const fetchComments = useStore((store) => store.fetchComments);
 
-  console.log(users);
   const postUser = users.find((user) => user?.id === post.userId);
-  console.log(postUser);
+  //   console.log(postUser);
   useEffect(() => {
     fetchComments();
   }, [comments.length]);
