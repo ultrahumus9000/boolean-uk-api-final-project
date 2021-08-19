@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { User } from "../store";
 import { useEffect } from "react";
 import useStore from "../store";
+import Headline from "../components/Headline";
 
 function Login() {
   const history = useHistory();
@@ -53,26 +54,29 @@ function Login() {
     targetEvent.reset();
   }
   return (
-    <section className="login">
-      <main className="login_main">
-        <h1>Food Journal</h1>
-        <Link to="/signup">
-          <button className="signup">Sign up</button>
-        </Link>
+    <>
+      <Headline />
+      <section className="login">
+        <main className="login_main">
+          <h1>Food Journal</h1>
+          <Link to="/signup">
+            <button className="signup">Sign up</button>
+          </Link>
 
-        <form className="login_form" onSubmit={handleSubmit}>
-          <label>
-            Username:
-            <input type="text" name="username" />
-          </label>
-          <label>
-            Password:
-            <input type="text" name="password" className="passwordInput" />
-          </label>
-          <input type="submit" value="Submit" className="submit-input" />
-        </form>
-      </main>
-    </section>
+          <form className="login_form" onSubmit={handleSubmit}>
+            <label>
+              Username:
+              <input type="text" name="username" />
+            </label>
+            <label>
+              Password:
+              <input type="text" name="password" className="passwordInput" />
+            </label>
+            <input type="submit" value="Submit" className="submit-input" />
+          </form>
+        </main>
+      </section>
+    </>
   );
 }
 

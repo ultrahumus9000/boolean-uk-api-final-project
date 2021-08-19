@@ -32,7 +32,8 @@ async function postOneUser(req, res) {
 }
 
 async function editUserProfile(req, res) {
-  const userId = req.params.id;
+  console.log(req.params.id);
+  const userId = Number(req.params.id);
   try {
     if (await idExsitingchecker(user, userId)) {
       const result = await user.update({

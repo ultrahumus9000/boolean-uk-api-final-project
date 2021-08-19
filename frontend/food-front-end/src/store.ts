@@ -82,7 +82,6 @@ type Store = {
   activeUser: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
-  // fetchUserById: (id: Number) => void;
   createUser: (data: newUserFrom) => void;
   updateUser: (data: User) => void;
   deleteUser: (id: number) => void;
@@ -127,8 +126,10 @@ const useStore = create<Store>((set, get) => ({
       .then((newUser) => set({ users: [...get().users, newUser] }));
   },
   updateUser: (data) => {
-    const id = data?.id;
-    fetch("http://localhost:3000/users/id", {
+    const id = Number(data?.id);
+    console.log("130", id);
+    console.log("130", id);
+    fetch(`http://localhost:3000/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +148,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   deleteUser: (id) => {
-    fetch("http://localhost:3000/users/id", {
+    fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
     });
   },
@@ -174,7 +175,7 @@ const useStore = create<Store>((set, get) => ({
   },
   updatePost: (data) => {
     const id = data.id;
-    fetch("http://localhost:3000/posts/id", {
+    fetch(`http://localhost:3000/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -193,7 +194,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   deletePost: (id) => {
-    fetch("http://localhost:3000/posts/id", {
+    fetch(`http://localhost:3000/posts/${id}`, {
       method: "DELETE",
     });
   },
@@ -217,7 +218,7 @@ const useStore = create<Store>((set, get) => ({
       );
   },
   deleteComment: (id) => {
-    fetch("http://localhost:3000/comments/id", {
+    fetch(`http://localhost:3000/comments/${id}`, {
       method: "DELETE",
     });
   },

@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Post from "../components/Post";
 import useStore from "../store";
 import { useEffect } from "react";
+import Headline from "../components/Headline";
 
 function Posts() {
   const comments = useStore((store) => store.comments);
@@ -23,14 +24,17 @@ function Posts() {
   const savedInfo = JSON.parse(data === null ? "" : data);
 
   return (
-    <main className="post_page">
-      <Header users={users} savedInfo={savedInfo} />
-      <section className="feed">
-        {posts.map((post) => {
-          return <Post key={post.id} post={post} users={users} />;
-        })}
-      </section>
-    </main>
+    <>
+      <Headline />
+      <main className="post_page">
+        <Header users={users} savedInfo={savedInfo} />
+        <section className="feed">
+          {posts.map((post) => {
+            return <Post key={post.id} post={post} users={users} />;
+          })}
+        </section>
+      </main>
+    </>
   );
 }
 

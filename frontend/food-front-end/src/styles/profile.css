@@ -1,15 +1,11 @@
-/* main.profile-page {
-  display: grid;
-  grid-template-rows: 100px 1fr;
-  align-items: center;
-  justify-items: center;
-  height: 100vh;
-} */
-
 .profile-page-big {
   height: 100vh;
-  display: block;
+  /* display: block; */
   padding: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 h2.edit-profile-title {
@@ -24,6 +20,22 @@ div.profile-to-edit {
   font-size: 1.5rem;
   align-items: start;
   justify-content: center;
+  /* background-color: thistle; */
+  padding: 30px;
+}
+.wrapper {
+  width: fit-content;
+  background-color: thistle;
+  justify-self: center;
+  border-radius: 10px;
+  display: grid;
+  justify-items: center;
+}
+
+div.edit-avatar {
+  display: grid;
+  place-items: center;
+  gap: 20px;
 }
 
 img.edit-avatar {
@@ -31,19 +43,16 @@ img.edit-avatar {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-div.edit-avatar {
-  display: grid;
-  grid-template-columns: 200px auto;
-  place-items: center;
-  gap: 20px;
+  border: 5px darkslateblue dashed;
 }
 
 div.edit-element {
   display: grid;
-  grid-template-columns: auto 100px;
   font-weight: bold;
+  border-radius: 5px;
+  border: 3px solid slateblue;
+  background-color: white;
+  padding: 5px 10px;
 }
 
 button.edit-profile {
@@ -51,4 +60,35 @@ button.edit-profile {
   height: 30px;
   background-color: crimson;
   justify-self: center;
+}
+
+.editing-profile {
+  background-color: tomato;
+  width: 450px;
+  height: 400px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  padding: 20px 10px;
+}
+
+.editing-profile .editform-input {
+  border: none;
+  border-radius: 10px;
+  transform: scale(1.5);
+  justify-self: center;
+  padding: 5px;
+}
+.edit-form-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.save {
+  background-color: turquoise;
+}
+.cancel {
+  background-color: slateblue;
 }
