@@ -5,17 +5,19 @@ type IdProps = {
   postId: number;
 };
 function CommentForm({ postId }: IdProps) {
-  const activeUser = useStore((store) => store.activeUser);
+  //   const activeUser = useStore((store) => store.activeUser);
   const createComment = useStore((store) => store.createComment);
 
-  //   console.log(postId);
+  const data = localStorage.getItem("userInfo");
+  const savedInfo = JSON.parse(data === null ? "" : data);
+
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
     const targetEvent = event.target as HTMLFormElement;
 
     const newComment = {
       content: targetEvent.comment.value,
-      userId: activeUser,
+      userId: savedInfo.id,
       postId: postId,
     };
 
@@ -24,6 +26,7 @@ function CommentForm({ postId }: IdProps) {
     targetEvent.reset();
   }
 
+  console.log("line 29", savedInfo.id);
   //   type newCommentForm = {
   //     content: string;
   //     userId: number;
@@ -31,8 +34,8 @@ function CommentForm({ postId }: IdProps) {
   //   };
   return (
     <form className="comment_form" onSubmit={handleSubmit}>
-      <label>
-        Comment:
+      <label className="comment-label">
+        <span>Comment: </span>
         <input className="comment-text" type="text" name="comment" />
       </label>
       <input className="comment-submit" type="submit" value="Submit" />

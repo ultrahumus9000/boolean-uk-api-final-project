@@ -6,6 +6,9 @@ import "../styles/new_post_form.css";
 
 function NewPostForm() {
   // const toggleaddress = useState(true);
+  const data = localStorage.getItem("userInfo");
+  const savedInfo = JSON.parse(data === null ? "" : data);
+
   const createPost = useStore((store) => store.createPost);
 
   const activeUser = useStore((store) => store.activeUser);
@@ -20,7 +23,7 @@ function NewPostForm() {
       picture: targetEvent.picture.value,
       text_content: targetEvent.text_content.value,
       address: targetEvent.address.value,
-      userId: activeUser,
+      userId: savedInfo.id,
     };
 
     createPost(newPost);

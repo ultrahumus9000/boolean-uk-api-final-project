@@ -11,7 +11,10 @@ body {
 header {
   display: flex;
 }
-
+.post_page {
+  width: 100vw;
+  overflow: scroll;
+}
 .profile {
   display: grid;
   grid-template-columns: 125px auto;
@@ -38,22 +41,22 @@ h3 {
 }
 
 .feed {
-  display: grid;
-  margin: 3rem;
-  width: 100vw;
-  grid-template-rows: auto;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 500px));
-  gap: 10px;
+  column-count: 3;
+  column-gap: 0px;
+  padding: 5rem;
+  row-gap: 20px;
 }
 
 article.post {
   display: grid;
+  /* display: inline-block; */
   grid-template-rows: auto;
+  justify-content: center;
   position: relative;
   width: fit-content;
   height: fit-content;
-  padding: 5px;
-  border-radius: 10px;
+  padding: 10px 5px;
+  border-radius: 20px;
   background-color: lightsalmon;
   border: 4px solid rgb(248, 228, 190);
   gap: 5px;
@@ -69,16 +72,18 @@ article.post {
   height: 60px;
   z-index: 1;
 }
-
+.post_info p {
+  max-width: 25ch;
+}
 .postuser-avatar {
   height: 50px;
   width: 50px;
   object-fit: cover;
   border-radius: 50px;
-  border: 4px darkcyan dotted;
+  border: 4px #1488a6 dotted;
 }
 .postuser-name {
-  background-color: darkcyan;
+  background-color: #1488a6;
   text-align: center;
   color: white;
   border-radius: 3px;
@@ -86,11 +91,13 @@ article.post {
 }
 
 .post_picture {
-  width: 350px;
+  width: 300px;
   height: 100%;
   align-self: center;
   object-fit: contain;
   margin: auto;
+  border-radius: 20px;
+  border: 7px solid teal;
 }
 
 .post_info {
@@ -110,41 +117,30 @@ svg {
   display: inline-block;
 }
 
-.tags {
-  display: grid;
-  grid-template-columns: auto;
-}
-
-.tag {
-  font-weight: bolder;
-  display: grid;
-  place-items: center;
-  background-color: lightseagreen;
-  max-width: 100px;
-  text-align: center;
-  height: 30px;
-  border-radius: 10px;
-}
-
 .comment_form {
-  margin-left: 3rem;
   display: grid;
-  grid-template-columns: 300px auto 1fr;
-  align-items: end;
-  margin: 0;
+  grid-template-columns: 260px 1fr;
+  /* align-items: center; */
+  justify-self: center;
 }
-
+.comment-label {
+  margin-left: 10px;
+  display: grid;
+  grid-template-rows: auto;
+}
 .comment-text {
-  width: 20rem;
+  width: 15rem;
+  margin-top: 5px;
 }
 
 .comment-submit {
   width: 60px;
-  height: 20px;
+  height: 50px;
   border-radius: 10px;
   background-color: azure;
   font-weight: bolder;
   border: none;
+  margin-right: 10px;
 }
 
 .comment {
@@ -177,16 +173,32 @@ img.post_avatar {
   grid-area: username;
 }
 
-.post {
+.tags {
+  display: grid;
+  grid-template-columns: auto;
 }
 
-@media only screen and (max-width: 812px) {
+.tag {
+  font-weight: bolder;
+  display: grid;
+  place-items: center;
+  background-color: lightseagreen;
+  max-width: 100px;
+  text-align: center;
+  height: 30px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 1300px) {
   header {
     flex-direction: column;
   }
+  .feed {
+    column-count: 2;
+  }
 }
 
-@media only screen and (max-width: 568px) {
+@media only screen and (max-width: 900px) {
   header {
     flex-direction: column;
     align-items: center;
@@ -199,5 +211,8 @@ img.post_avatar {
 
   .profile {
     width: 15rem;
+  }
+  .feed {
+    column-count: 1;
   }
 }
