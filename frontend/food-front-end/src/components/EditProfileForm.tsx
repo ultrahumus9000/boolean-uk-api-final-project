@@ -10,8 +10,8 @@ function EditProfileForm() {
       <input type="text" name="lastName" placeholder="user.lastName" />
       <input type="email" name="email" placeholder="user.email" />
       <div className="edit-form-buttons">
-        <button>Save</button>
-        <button>Cancel</button>
+        <button className="save">Save</button>
+        <button className="cancel">Cancel</button>
       </div>
     </form>
   );
