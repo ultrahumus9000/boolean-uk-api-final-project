@@ -1,4 +1,4 @@
-import "../styles/login.css";
+import "../styles/posts.css";
 
 import React from "react";
 import "../styles/posts.css";
