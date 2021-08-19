@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import NewPostForm from "../components/NewPostForm";
-import useStore, { User } from "../store";
+import { User } from "../store";
 type HeaderProp = {
   users: User[];
   savedInfo: User;
