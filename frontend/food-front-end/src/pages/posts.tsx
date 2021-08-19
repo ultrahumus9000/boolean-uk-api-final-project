@@ -21,8 +21,12 @@ function Posts() {
     fetchPosts();
   }, [posts.length, comments.length]);
 
+  console.log("posts", posts);
+
   const data = localStorage.getItem("userInfo");
+  console.log("line 27", data);
   const savedInfo = JSON.parse(data === null ? "" : data);
+  console.log(savedInfo);
 
   function handleDisplay() {
     setDisplay(!display);

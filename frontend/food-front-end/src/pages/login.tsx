@@ -26,13 +26,40 @@ function Login() {
 
   // const activeUserInfo = users.find((user) => user?.id === activeUser);
 
-  function frontendCheckUser(data: CheckUser) {}
+  function frontendCheckUser(data: CheckUser) {
+    fetch("http://localhost:3000/users/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((dataCheckResult) => {
+        switch (dataCheckResult) {
+          case "username is not valid":
+            alert("username is not valid");
+            break;
+          case "password doesnt match the account":
+            alert("password doesnt match the account");
+            break;
+          default:
+            StoreUser(JSON.stringify(dataCheckResult));
+            console.log("user info ", dataCheckResult);
+            console.log("type of  ", typeof dataCheckResult);
+            setActiveUser(dataCheckResult.id);
+            console.log("line 53", localStorage.getItem("userInfo"));
+            history.push("/posts");
+            break;
+        }
+      });
+  }
 
   const StoreUser = (info: string) => {
     localStorage.setItem("userInfo", info);
   };
-
-  console.log(localStorage.getItem("userInfo"));
 
   function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
@@ -42,23 +69,8 @@ function Login() {
       username: targetEvent.username.value,
       password: targetEvent.password.value,
     };
-    const activeUserInfo: User | undefined = users.find(
-      (user) => user?.username === loginUser.username
-    );
+    frontendCheckUser(loginUser);
 
-    if (activeUserInfo === undefined) {
-      alert("user information doesnt match");
-      return;
-    }
-
-    if (activeUserInfo.password !== loginUser.password) {
-      alert("user information doesnt match");
-      return;
-    }
-    setActiveUser(activeUserInfo.id);
-    StoreUser(JSON.stringify(activeUserInfo));
-    console.log(activeUserInfo);
-    history.push("/posts");
     targetEvent.reset();
   }
   return (
