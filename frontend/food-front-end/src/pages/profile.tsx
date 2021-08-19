@@ -4,14 +4,16 @@ import { useState } from "react";
 import "../styles/profile.css";
 import useStore from "../store";
 
-import EditProfileForm from "../components/EditProfileForm"
+import EditProfileForm from "../components/EditProfileForm";
 
 function Profile() {
   const [editForm, setEditForm] = useState(false);
 
   function handleClick() {
-     const editForm = true
+    const editForm = true;
   }
+  const data = localStorage.getItem("userInfo");
+  const savedInfo = JSON.parse(data === null ? "" : data);
 
   return (
     <main className="profile-page">
