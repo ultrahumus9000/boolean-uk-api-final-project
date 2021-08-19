@@ -4,7 +4,7 @@ const { errorHandler, idExsitingchecker } = require("../helper");
 
 async function getAllUser(req, res) {
   try {
-    const result = await user.findMany({});
+    const result = await user.findMany();
     res.json(result);
   } catch (error) {
     console.log(error);
