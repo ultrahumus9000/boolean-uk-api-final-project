@@ -147,7 +147,7 @@ svg {
   background-color: antiquewhite;
   display: grid;
   grid-template:
-    "comment_content comment_content post_avatar" 100px
+    "comment_content comment_content post_avatar" 50px
     "comment_content comment_content username" auto/
     100px 100px auto;
 

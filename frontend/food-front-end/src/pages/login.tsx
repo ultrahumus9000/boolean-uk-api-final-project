@@ -10,13 +10,13 @@ import useStore from "../store";
 function Login() {
   const history = useHistory();
   const users = useStore((store) => store.users);
-  const fetchUsers = useStore((store) => store.fetchUsers);
+  // const fetchUsers = useStore((store) => store.fetchUsers);
   const setActiveUser = useStore((store) => store.setActiveUser);
   const activeUser = useStore((store) => store.activeUser);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []);
 
   const activeUserInfo = users.find((user) => user?.id === activeUser);
 
