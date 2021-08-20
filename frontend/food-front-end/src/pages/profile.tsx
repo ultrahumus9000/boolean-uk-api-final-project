@@ -1,16 +1,21 @@
 import React, { SyntheticEvent, useReducer } from "react";
 import { useState } from "react";
-
+import clown from "../assets/clown.jpeg";
+import goback from "../assets/goback.svg";
 import "../styles/profile.css";
 import useStore from "../store";
 
 import Headline from "../components/Headline";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
   const updateUser = useStore((store) => store.updateUser);
+  const deleteUser = useStore((store) => store.deleteUser);
   const [editForm, setEditForm] = useState(false);
+  const [leaveDisplay, setleaveDisplay] = useState(false);
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
+  const history = useHistory();
 
   const [form, setForm] = useState(savedInfo);
 
@@ -18,10 +23,16 @@ function Profile() {
     setEditForm(!editForm);
   }
 
+  function deleteAccount() {
+    deleteUser(savedInfo.id);
+    setTimeout(() => {
+      history.push("/");
+    }, 1500);
+  }
+
   function handleChange(event: SyntheticEvent) {
     const targetEvent = event.target as HTMLInputElement;
 
-    console.log("keyname", targetEvent.name);
     const key = targetEvent.name;
     let newForm = savedInfo;
     switch (key) {
@@ -67,6 +78,15 @@ function Profile() {
     <>
       <Headline />
       <main className="profile-page-big">
+        <img className="gobackimg" src={goback} />
+        <button
+          className="go-back-btn"
+          onClick={() => {
+            history.push("/posts");
+          }}
+        >
+          Go back To Post
+        </button>
         {editForm ? (
           <form className="editing-profile">
             <input
@@ -120,8 +140,24 @@ function Profile() {
           </form>
         ) : (
           <div className="wrapper">
+            {leaveDisplay ? (
+              <section className="modal-section">
+                <img src={clown} />
+                <h2> Are you sure ? </h2>
+                <button className="let-go-btn" onClick={deleteAccount}>
+                  Okay I let you go
+                </button>
+                <button
+                  className="stay-btn"
+                  onClick={() => {
+                    setleaveDisplay(false);
+                  }}
+                >
+                  Okay I ll stay
+                </button>
+              </section>
+            ) : null}
             <h2 className="edit-profile-title">Your profile:</h2>
-
             <div className="profile-to-edit">
               <div className="edit-avatar">
                 <img
@@ -146,6 +182,14 @@ function Profile() {
               <div className="edit-profile-buttons">
                 <button className="edit-profile" onClick={handleClick}>
                   Edit
+                </button>
+                <button
+                  className="delete-account"
+                  onClick={() => {
+                    setleaveDisplay(true);
+                  }}
+                >
+                  Delete Account
                 </button>
               </div>
             </div>

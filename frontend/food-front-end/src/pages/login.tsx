@@ -47,10 +47,7 @@ function Login() {
             break;
           default:
             StoreUser(JSON.stringify(dataCheckResult));
-            console.log("user info ", dataCheckResult);
-            console.log("type of  ", typeof dataCheckResult);
             setActiveUser(dataCheckResult.id);
-            console.log("line 53", localStorage.getItem("userInfo"));
             history.push("/posts");
             break;
         }

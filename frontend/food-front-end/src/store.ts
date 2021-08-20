@@ -1,3 +1,4 @@
+import React from "react";
 import create from "zustand";
 
 type newUserFrom = {
@@ -143,9 +144,24 @@ const useStore = create<Store>((set, get) => ({
   },
   deleteUser: (id) => {
     id = Number(id);
-    fetch(`http://localhost:3000/users/${id}`, {
+    return fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
-    });
+    })
+      .then(() => {
+        const updateUsers = get().users.filter((user) => user?.id !== id);
+        set({ users: updateUsers });
+
+        const updatedPosts = get().posts.filter((post) => post.userId !== id);
+        set({ posts: updatedPosts });
+
+        const updatedComments = get().comments.filter(
+          (comment) => comment.userId !== id
+        );
+        set({ comments: updatedComments });
+      })
+      .then(() => {
+        localStorage.clear();
+      });
   },
 
   fetchPosts: () => {
