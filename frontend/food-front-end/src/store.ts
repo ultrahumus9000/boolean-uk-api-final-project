@@ -117,7 +117,7 @@ type Store = {
   fetchComments: () => void;
   createComment: (arg: newCommentForm) => void;
   deleteComment: (id: number) => void;
-  // fetchtagsById: (postId: number) => void;
+  fetchtagsById: (postId: number) => void;
   creatTag: (data: TagForm) => void;
   deleteTag: (id: number) => void;
 };
@@ -268,14 +268,13 @@ const useStore = create<Store>((set, get) => ({
       method: "DELETE",
     }).then(() => {});
   },
-  // fetchtagsById: (postId) => {
-  //   fetch(`http://localhost:3000/tags/${postId}`)
-  //     .then((resp) => resp.json())
-  //     .then((tagsFromServer) => {
-  //       console.log("tagsFromServer", tagsFromServer.tags);
-  //       set({ tags: tagsFromServer.tags });
-  //     });
-  // },
+  fetchtagsById: (postId) => {
+    fetch(`http://localhost:3000/tags/${postId}`)
+      .then((resp) => resp.json())
+      .then((tagsFromServer) => {
+        set({ tags: tagsFromServer.tags });
+      });
+  },
   creatTag: (data: TagForm) => {
     fetch("http://localhost:3000/tags", {
       method: "POST",

@@ -27,13 +27,13 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
   const tags = useStore((store) => store.tags);
-  //   const fetchTagsByPostId = useStore((store) => store.fetchtagsById);
+  const fetchTagsByPostId = useStore((store) => store.fetchtagsById);
 
   const postUser = users.find((user) => user?.id === post.userId);
   //   const fetchTages = useStore(store=>store.)
   useEffect(() => {
     fetchComments();
-    // fetchTagsByPostId(post.id);
+    fetchTagsByPostId(post.id);
   }, [comments.length]);
 
   const data = localStorage.getItem("userInfo");
