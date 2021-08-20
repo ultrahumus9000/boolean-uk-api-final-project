@@ -55,15 +55,27 @@ async function createOnetag(req, res) {
         // postId Int
         // tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
         // tagId  Int
-      });
-
-      const tagResult = await tag.findUnique({
-        where: {
-          id: newTag.tagId,
+        include: {
+          post: {
+            select: {
+              id: true,
+            },
+          },
+          tag: {
+            select: {
+              type: true,
+            },
+          },
         },
       });
 
-      res.json(tagResult.type);
+      // const tagResult = await tag.findUnique({
+      //   where: {
+      //     id: newTag.tagId,
+      //   },
+      // });
+
+      res.json(newTag);
     } else {
       const tagInfo = await tag.create({
         data: {
@@ -76,10 +88,23 @@ async function createOnetag(req, res) {
           postId,
           tagId: tagInfo.id,
         },
+        include: {
+          post: {
+            select: {
+              id: true,
+            },
+          },
+          tag: {
+            select: {
+              type: true,
+            },
+          },
+        },
       });
 
-      // res.json(newTagToPost);
-      res.json(tagInfo.type);
+      res.json(newTagToPost);
+      // res.json(tagInfo.type);
+      // res.json(tagInfo);
     }
   } catch (error) {
     console.log(error);
@@ -101,10 +126,45 @@ async function deleteOnetag(req, res) {
   }
 }
 
+async function getOnePostAllTags(req, res) {
+  const postId = Number(req.params.id);
+
+  try {
+    const postToTagsInfo = await post.findUnique({
+      where: {
+        id: postId,
+      },
+      select: {
+        posttotags: true,
+      },
+    });
+    const tagIds = postToTagsInfo.posttotags.map((info) => info.tagId);
+    const tags = [];
+    for await (const tagId of tagIds) {
+      const tagType = await tag.findUnique({
+        where: {
+          id: tagId,
+        },
+        select: {
+          type: true,
+        },
+      });
+
+      tags.push(tagType);
+    }
+
+    res.json({ tags });
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
+
 module.exports = {
   getAlltags,
   createOnetag,
   deleteOnetag,
+  getOnePostAllTags,
 };
 
 // model PostToTag {
@@ -121,4 +181,16 @@ module.exports = {
 //   id         Int         @id @default(autoincrement())
 //   type       String
 //   postToTags PostToTag[]
+// }
+
+// {
+//   "id": 10,
+//   "postId": 5,
+//   "tagId": 11,
+//   "post": {
+//     "id": 5
+//   },
+//   "tag": {
+//     "type": "bri"
+//   }
 // }

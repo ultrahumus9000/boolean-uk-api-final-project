@@ -64,6 +64,29 @@ type updatePost = {
   likes: number;
 };
 
+// model PostToTag {
+//   id     Int  @id @default(autoincrement())
+//   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+//   postId Int
+//   tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+//   tagId  Int
+
+//   @@unique([postId, tagId])
+// }
+
+// model Tag {
+//   id         Int         @id @default(autoincrement())
+//   type       String
+//   postToTags PostToTag[]
+// }
+
+export type TagForm = {
+  postId: number;
+  type: string;
+};
+export type Tag = {
+  type: string;
+};
 // id             Int         @id @default(autoincrement())
 // date           DateTime    @db.Date
 // text_content   String      @default("")
@@ -81,6 +104,7 @@ type Store = {
   posts: SinglePost[];
   comments: SingleComment[];
   activeUser: number;
+  tags: Tag[];
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
   createUser: (data: newUserFrom) => void;
@@ -93,6 +117,9 @@ type Store = {
   fetchComments: () => void;
   createComment: (arg: newCommentForm) => void;
   deleteComment: (id: number) => void;
+  // fetchtagsById: (postId: number) => void;
+  creatTag: (data: TagForm) => void;
+  deleteTag: (id: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -101,6 +128,7 @@ const useStore = create<Store>((set, get) => ({
   posts: [],
   comments: [],
   activeUser: 0,
+  tags: [],
   setActiveUser: (userId) => set({ activeUser: userId }),
 
   fetchUsers: () => {
@@ -240,6 +268,81 @@ const useStore = create<Store>((set, get) => ({
       method: "DELETE",
     }).then(() => {});
   },
+  // fetchtagsById: (postId) => {
+  //   fetch(`http://localhost:3000/tags/${postId}`)
+  //     .then((resp) => resp.json())
+  //     .then((tagsFromServer) => {
+  //       console.log("tagsFromServer", tagsFromServer.tags);
+  //       set({ tags: tagsFromServer.tags });
+  //     });
+  // },
+  creatTag: (data: TagForm) => {
+    fetch("http://localhost:3000/tags", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => resp.json())
+
+      .then((newTagFromServer) => {});
+  },
+  deleteTag: (id: number) => {
+    return;
+  },
 }));
 
 export default useStore;
+
+// async function createOnetag(req, res) {
+//   const { type, postId } = req.body;
+//   try {
+//     const tags = await tag.findMany();
+
+//     const tagtypes = tags.map((tagInfo) => tagInfo.type);
+
+//     if (tagtypes.includes(type)) {
+//       const findTag = tags.find((tagInfo) => tagInfo.type === type);
+
+//       const newTag = await postToTag.create({
+//         data: {
+//           postId,
+//           tagId: findTag.id,
+//         },
+//         // id     Int  @id @default(autoincrement())
+//         // post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+//         // postId Int
+//         // tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+//         // tagId  Int
+//       });
+
+//       const tagResult = await tag.findUnique({
+//         where: {
+//           id: newTag.tagId,
+//         },
+//       });
+
+//       res.json(tagResult.type);
+//     } else {
+//       const tagInfo = await tag.create({
+//         data: {
+//           type,
+//         },
+//       });
+
+//       const newTagToPost = await postToTag.create({
+//         data: {
+//           postId,
+//           tagId: tagInfo.id,
+//         },
+//       });
+
+//       // res.json(newTagToPost);
+//       res.json(tagInfo.type);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.json(errorHandler(error));
+//   }
+// }

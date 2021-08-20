@@ -238,6 +238,20 @@ img.post_avatar {
   height: 30px;
   border-radius: 10px;
 }
+.add-new-tag-btn {
+  width: 200px;
+  margin: 10px;
+  background-color: tomato;
+}
+
+.even {
+  background-color: tomato;
+  color: white;
+}
+.odd {
+  background-color: slateblue;
+  color: white;
+}
 
 @media only screen and (max-width: 1300px) {
   header {

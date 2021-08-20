@@ -26,10 +26,14 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
   const [click, setClick] = useState(true);
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
-  const postUser = users.find((user) => user?.id === post.userId);
+  const tags = useStore((store) => store.tags);
+  //   const fetchTagsByPostId = useStore((store) => store.fetchtagsById);
 
+  const postUser = users.find((user) => user?.id === post.userId);
+  //   const fetchTages = useStore(store=>store.)
   useEffect(() => {
     fetchComments();
+    // fetchTagsByPostId(post.id);
   }, [comments.length]);
 
   const data = localStorage.getItem("userInfo");
@@ -37,6 +41,13 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
 
   let matchedComments: Comments = [];
 
+  console.log(Object.keys(tags));
+
+  //   for (const tag of tags) {
+  //     console.log(tag);
+  //   }
+
+  //   tags?.map((tag) => console.log(tag));
   if (comments.length !== 0) {
     matchedComments = comments.filter((comment) => comment.postId === post.id);
   }
@@ -188,7 +199,18 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
               </p>
             </div>
             <div className="tags">
-              <span className="tag">American</span>
+              {/* {tags.map((tag, index) => {
+                return (
+                  <span
+                    key={index}
+                    className={`${index % 2 === 0 ? "even" : "odd"}`}
+                  >
+                    {tag.type}====
+                  </span>
+                );
+              })} */}
+
+              <button className="add-new-tag-btn"> add new tag </button>
             </div>
           </div>
           <CommentForm postId={post.id} />
