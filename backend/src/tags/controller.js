@@ -23,13 +23,48 @@ const { errorHandler } = require("../helper");
 
 async function getAlltags(req, res) {
   try {
-    const result = await tag.findMany();
-    const secondResult = await postToTag.findMany();
-    const fullResult = {
-      tags: result,
-      postToTags: secondResult,
-    };
-    res.json(fullResult);
+    // const result = await tag.findMany();
+    // const secondResult = await postToTag.findMany();
+    // const fullResult = {
+    //   tags: result,
+    //   postToTags: secondResult,
+    // };
+    // res.json(fullResult);
+
+    const result = await post.findMany({
+      select: {
+        id: true,
+        posttotags: {
+          select: {
+            tag: {
+              select: {
+                type: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const firstModifiedResult = await result.map((post) => {
+      const newData = {
+        postId: post.id,
+        tags: post.posttotags,
+      };
+      return newData;
+    });
+
+    const secondModify = await firstModifiedResult.map((post) => {
+      const tagsArray = post.tags.map((tagsinfo) => {
+        return tagsinfo.tag.type;
+      });
+      const newData = {
+        postId: post.postId,
+        tags: tagsArray,
+      };
+      return newData;
+    });
+    res.json(secondModify);
   } catch (error) {
     console.log(error);
   }

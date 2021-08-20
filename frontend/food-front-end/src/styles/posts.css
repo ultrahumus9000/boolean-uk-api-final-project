@@ -243,14 +243,46 @@ img.post_avatar {
   margin: 10px;
   background-color: tomato;
 }
-
-.even {
-  background-color: tomato;
-  color: white;
+.tags {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(60px, 80px));
 }
-.odd {
+.default {
+  background-color: deeppink;
+  padding: 5px;
+  border-radius: 10px;
+  justify-self: center;
+  align-self: center;
+}
+.chinese {
+  background-color: gold;
+}
+.italian {
+  background-color: rgb(178, 66, 32);
+}
+.spicy {
+  background-color: red;
+}
+.sweet {
+  background-color: pink;
+}
+.british {
   background-color: slateblue;
-  color: white;
+}
+.bri {
+  background-color: slateblue;
+}
+.thai {
+  background-color: turquoise;
+}
+.amercian {
+  background-color: brown;
+}
+.japanse {
+  background-color: white;
+}
+.indian {
+  background-color: indianred;
 }
 
 @media only screen and (max-width: 1300px) {
