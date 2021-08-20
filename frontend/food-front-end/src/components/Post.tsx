@@ -1,56 +1,50 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import useStore, { SinglePost } from "../store";
+import useStore, { SinglePost, Tag } from "../store";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SingleComment, User } from "../store";
 import UserForPost from "./UserForPost";
-
-// type UpdatePost = {
-//   id: number;
-//   likes: number;
-// };
 
 type PostProps = {
   post: SinglePost;
   users: User[];
   display: boolean;
   handleDisplay: () => void;
+  tags: Tag[] | undefined;
 };
 
 type Comments = SingleComment[];
 
-function Post({ post, users, display, handleDisplay }: PostProps) {
+function Post({ post, users, display, handleDisplay, tags }: PostProps) {
   const comments = useStore((store) => store.comments);
   const updatePost = useStore((store) => store.updatePost);
   const [click, setClick] = useState(true);
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
-  const tags = useStore((store) => store.tags);
-  const fetchTagsByPostId = useStore((store) => store.fetchtagsById);
-
   const postUser = users.find((user) => user?.id === post.userId);
-  //   const fetchTages = useStore(store=>store.)
+
   useEffect(() => {
     fetchComments();
-    // fetchTagsByPostId(post.id);
   }, [comments.length]);
 
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
+  if (tags === undefined) {
+    return null;
+  }
+  const tagInfo = tags.filter((tag) => tag.postId === post.id);
+  console.log(tagInfo);
+
+  const modifiedTags = tagInfo[0]?.tags.map((singleTag) => singleTag) || [];
+
   let matchedComments: Comments = [];
 
-  console.log(Object.keys(tags));
-
-  //   for (const tag of tags) {
-  //     console.log(tag);
-  //   }
-
-  //   tags?.map((tag) => console.log(tag));
   if (comments.length !== 0) {
     matchedComments = comments.filter((comment) => comment.postId === post.id);
   }
+
   let checker = post.userId === savedInfo.id;
 
   function handleDelete() {
@@ -199,18 +193,17 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
               </p>
             </div>
             <div className="tags">
-              {/* {tags.map((tag, index) => {
+              {modifiedTags.map((tag, index) => {
                 return (
-                  <span
-                    key={index}
-                    className={`${index % 2 === 0 ? "even" : "odd"}`}
-                  >
-                    {tag.type}====
+                  <span key={index} className={`default ${tag}`}>
+                    {tag}
                   </span>
                 );
-              })} */}
+              })}
 
-              <button className="add-new-tag-btn"> add new tag </button>
+              {checker ? (
+                <button className="add-new-tag-btn"> add new tag </button>
+              ) : null}
             </div>
           </div>
           <CommentForm postId={post.id} />

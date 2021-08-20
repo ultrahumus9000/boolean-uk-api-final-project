@@ -1,6 +1,18 @@
 import React from "react";
 import create from "zustand";
 
+function calculateTagLength(tagsFromServer: Tag[]) {
+  const tagLengthArray = tagsFromServer.map((tag: Tag) => {
+    const result = tag.tags.length;
+    return result;
+  });
+
+  const reducer = (accumulator: number, currentValue: number) =>
+    accumulator + currentValue;
+  const tagLength = tagLengthArray.reduce(reducer);
+  return tagLength;
+}
+
 type newUserFrom = {
   first_name: string;
   last_name: string;
@@ -84,9 +96,14 @@ export type TagForm = {
   postId: number;
   type: string;
 };
+
 export type Tag = {
-  type: string;
+  postId: number;
+  tags: String[];
 };
+// "postId": 3,
+// "tags": []
+
 // id             Int         @id @default(autoincrement())
 // date           DateTime    @db.Date
 // text_content   String      @default("")
@@ -105,6 +122,7 @@ type Store = {
   comments: SingleComment[];
   activeUser: number;
   tags: Tag[];
+  tagLength: number;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
   createUser: (data: newUserFrom) => void;
@@ -117,18 +135,18 @@ type Store = {
   fetchComments: () => void;
   createComment: (arg: newCommentForm) => void;
   deleteComment: (id: number) => void;
-  fetchtagsById: (postId: number) => void;
+  fetchTags: () => void;
   creatTag: (data: TagForm) => void;
   deleteTag: (id: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
   users: [],
-  // user: {},
   posts: [],
   comments: [],
   activeUser: 0,
   tags: [],
+  tagLength: 0,
   setActiveUser: (userId) => set({ activeUser: userId }),
 
   fetchUsers: () => {
@@ -268,11 +286,13 @@ const useStore = create<Store>((set, get) => ({
       method: "DELETE",
     }).then(() => {});
   },
-  fetchtagsById: (postId) => {
-    fetch(`http://localhost:3000/tags/${postId}`)
+  fetchTags: () => {
+    fetch(`http://localhost:3000/tags/`)
       .then((resp) => resp.json())
       .then((tagsFromServer) => {
-        set({ tags: tagsFromServer.tags });
+        set({ tags: tagsFromServer });
+        const newTagLength = calculateTagLength(tagsFromServer);
+        set({ tagLength: newTagLength });
       });
   },
   creatTag: (data: TagForm) => {
