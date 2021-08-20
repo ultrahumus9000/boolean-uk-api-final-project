@@ -6,7 +6,8 @@ import "../styles/new_post_form.css";
 function NewPostForm() {
   const [addressStatus, setAddressStatus] = useState(false);
 
-  function toggleAddress() {
+  function toggleAddress(event: SyntheticEvent) {
+    event.preventDefault();
     setAddressStatus(!addressStatus);
   }
 

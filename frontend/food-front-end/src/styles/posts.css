@@ -53,6 +53,7 @@ header {
 }
 h3.name {
   grid-area: name;
+  padding-left: 40px;
 }
 img.avatar {
   width: 100px;
