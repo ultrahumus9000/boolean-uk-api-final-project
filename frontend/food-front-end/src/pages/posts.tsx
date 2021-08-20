@@ -19,14 +19,13 @@ function Posts() {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
-    fetchUsers();
-    fetchPosts();
-    fetchTags();
-  }, [posts.length]);
-
-  useEffect(() => {
     fetchTags();
   }, [tagLength]);
+
+  useEffect(() => {
+    fetchUsers();
+    fetchPosts();
+  }, [posts.length]);
 
   console.log("tagLength", tagLength);
 
@@ -41,24 +40,28 @@ function Posts() {
   return (
     <>
       <Headline />
-      <main className="post_page">
-        <Header users={users} savedInfo={savedInfo} />
+      {tags === undefined ? (
+        <h1>we are loading for you!!!</h1>
+      ) : (
+        <main className="post_page">
+          <Header users={users} savedInfo={savedInfo} />
 
-        <section className={`${display ? "feed" : "feed-mason"}`}>
-          {posts.map((post) => {
-            return (
-              <Post
-                key={post.id}
-                post={post}
-                users={users}
-                display={display}
-                handleDisplay={handleDisplay}
-                tags={tags}
-              />
-            );
-          })}
-        </section>
-      </main>
+          <section className={`${display ? "feed" : "feed-mason"}`}>
+            {posts.map((post) => {
+              return (
+                <Post
+                  key={post.id}
+                  post={post}
+                  users={users}
+                  display={display}
+                  handleDisplay={handleDisplay}
+                  tags={tags}
+                />
+              );
+            })}
+          </section>
+        </main>
+      )}
     </>
   );
 }

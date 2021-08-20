@@ -11,7 +11,7 @@ type PostProps = {
   users: User[];
   display: boolean;
   handleDisplay: () => void;
-  tags: Tag[];
+  tags: Tag[] | undefined;
 };
 
 type Comments = SingleComment[];
@@ -31,9 +31,13 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
+  if (tags === undefined) {
+    return null;
+  }
   const tagInfo = tags.filter((tag) => tag.postId === post.id);
-  const modifiedTags = tagInfo[0].tags.map((singleTag) => singleTag);
-  //   console.log(modifiedTags);
+  console.log(tagInfo);
+
+  const modifiedTags = tagInfo[0]?.tags.map((singleTag) => singleTag) || [];
 
   let matchedComments: Comments = [];
 
