@@ -19,7 +19,12 @@ function Posts() {
   useEffect(() => {
     fetchUsers();
     fetchPosts();
-  }, [posts.length, comments.length]);
+  }, [posts.length]);
+
+  // useEffect(() => {
+  //   // fetchUsers();
+  //   // fetchPosts();
+  // }, []);
 
   console.log("posts", posts);
 

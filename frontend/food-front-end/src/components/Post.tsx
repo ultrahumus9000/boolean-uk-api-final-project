@@ -33,7 +33,7 @@ function Post({ post, users, display, handleDisplay }: PostProps) {
   //   const fetchTages = useStore(store=>store.)
   useEffect(() => {
     fetchComments();
-    fetchTagsByPostId(post.id);
+    // fetchTagsByPostId(post.id);
   }, [comments.length]);
 
   const data = localStorage.getItem("userInfo");

@@ -4,7 +4,6 @@ const { errorHandler } = require("../helper");
 async function getAllcomments(req, res) {
   try {
     const result = await comment.findMany();
-    console.log(result);
     res.json(result);
   } catch (error) {
     console.log(error);
