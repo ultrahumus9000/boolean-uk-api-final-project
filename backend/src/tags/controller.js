@@ -1,29 +1,24 @@
 const { post, tag, postToTag } = require("../../database");
 const { errorHandler } = require("../helper");
 
-// async function getPostsByTag(req, res) {
-//   try {
-//     const result = await post.findMany({
-//       where: {
-//         tags: {
-//           some: {
-//             tag: {
-//               type: req.body,
-//             },
-//           },
-//         },
-//       },
-//     });
-//     result.json(result);
-//   } catch (error) {
-//     console.log(error);
-//     res.json(errorHandler(error));
-//   }
-// }
+async function getTagsTypes(req, res) {
+  try {
+    const result = await tag.findMany({
+      select: {
+        type: true,
+      },
+    });
+
+    const modifiedResult = result.map((typeObj) => typeObj.type);
+    res.json(modifiedResult);
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
 
 async function getAlltags(req, res) {
   try {
-   
     const result = await post.findMany({
       select: {
         id: true,
@@ -189,6 +184,7 @@ async function getOnePostAllTags(req, res) {
 }
 
 module.exports = {
+  getTagsTypes,
   getAlltags,
   createOnetag,
   deleteOnetag,

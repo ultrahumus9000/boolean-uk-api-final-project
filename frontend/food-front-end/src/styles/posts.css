@@ -90,7 +90,7 @@ h3 {
 article.post {
   display: grid;
   grid-template-rows: auto;
-  justify-content: center;
+  justify-items: center;
   position: relative;
   width: fit-content;
   height: fit-content;
@@ -108,9 +108,12 @@ article.post {
 .delete-btn {
   position: absolute;
   top: 10px;
-  right: 20px;
+  right: 13px;
 }
-
+.delete-btn:hover {
+  transform: scale(1.1);
+  filter: saturate(1.5);
+}
 .post-user {
   display: grid;
   position: absolute;
@@ -121,7 +124,7 @@ article.post {
   z-index: 1;
 }
 .post_info p {
-  max-width: 25ch;
+  max-width: 60ch;
 }
 .postuser-avatar {
   height: 50px;
@@ -136,6 +139,60 @@ article.post {
   color: white;
   border-radius: 3px;
   padding: 2px;
+}
+
+.post_form {
+  display: grid;
+  grid-template-rows: auto repeat(3, 50px);
+  margin-left: 5rem;
+  background-color: pink;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 2rem;
+  row-gap: 10px;
+  place-items: center;
+}
+
+.post_form_heading {
+  text-align: left;
+  margin: 0;
+}
+
+input {
+  margin-left: 2rem;
+  display: block;
+  width: 15rem;
+}
+
+label {
+  font-size: 1rem;
+  display: block;
+}
+.add-btn {
+  background-color: tomato;
+}
+.new_post_submit {
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bolder;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(20deg, slateblue, lightseagreen);
+  color: aliceblue;
+}
+.new_post_submit:hover {
+  filter: contrast(1.5);
+  transform: scale(1.1);
+}
+.new_post_submit:active {
+  filter: contrast(1.5);
+  transform: scale(1.1);
 }
 
 .post_picture {
@@ -153,7 +210,6 @@ article.post {
 .post_info {
   display: grid;
   grid-template-rows: auto;
-  margin-left: 2rem;
   gap: 5px;
 }
 
@@ -223,11 +279,6 @@ img.post_avatar {
   grid-area: username;
 }
 
-.tags {
-  display: grid;
-  grid-template-columns: auto;
-}
-
 .tag {
   font-weight: bolder;
   display: grid;
@@ -243,7 +294,7 @@ img.post_avatar {
   margin: 10px;
   background-color: tomato;
 }
-.tags {
+.tags-display {
   display: grid;
   grid-template-columns: repeat(5, minmax(60px, 80px));
 }
@@ -284,7 +335,53 @@ img.post_avatar {
 .indian {
   background-color: indianred;
 }
+.form {
+  border: 2px solid black;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.tag-form {
+  display: grid;
+  grid-template-columns: auto;
+  width: fit-content;
+  gap: 10px;
+}
+.tag-form select {
+  border: none;
+  background-color: pink;
+  height: 30px;
+  border-radius: 10px;
+  padding-left: 20px;
+  font-size: larger;
+}
+.select-div {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+}
+.select-div button {
+  height: 30px;
+  font-size: medium;
+}
 
+.display-more-tag-form-btn {
+  background-color: plum;
+  /* width: 40ch; */
+}
+.comment_content {
+  width: 300px;
+  padding-left: 20px;
+}
+.create-tag-form {
+  display: flex;
+  gap: 10px;
+}
+
+.create-tag-form button {
+  background: rgb(153, 214, 184);
+  color: black;
+}
 @media only screen and (max-width: 1300px) {
   header {
     flex-direction: column;

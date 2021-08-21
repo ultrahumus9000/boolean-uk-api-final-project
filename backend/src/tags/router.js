@@ -7,11 +7,14 @@ const tagRouter = require("express").Router();
 // postRouter.get("/?tag=tag", getPostsByTag);
 
 const {
+  getTagsTypes,
   getAlltags,
   createOnetag,
   deleteOnetag,
   getOnePostAllTags,
 } = require("./controller");
+
+tagRouter.get("/types", getTagsTypes);
 tagRouter.get("/", getAlltags);
 tagRouter.post("/", createOnetag);
 tagRouter.get("/:id", getOnePostAllTags);

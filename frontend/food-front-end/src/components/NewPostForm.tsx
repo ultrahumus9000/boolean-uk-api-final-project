@@ -1,7 +1,6 @@
 import React, { SyntheticEvent } from "react";
 import { useState } from "react";
 import useStore, { User } from "../store";
-import "../styles/new_post_form.css";
 
 function NewPostForm() {
   const [addressStatus, setAddressStatus] = useState(false);

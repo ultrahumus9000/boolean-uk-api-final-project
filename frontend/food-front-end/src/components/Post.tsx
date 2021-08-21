@@ -5,6 +5,7 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { SingleComment, User } from "../store";
 import UserForPost from "./UserForPost";
+import TagForm from "./TagForm";
 
 type PostProps = {
   post: SinglePost;
@@ -20,6 +21,7 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
   const comments = useStore((store) => store.comments);
   const updatePost = useStore((store) => store.updatePost);
   const [click, setClick] = useState(true);
+  const [tick, setTick] = useState(false);
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
   const postUser = users.find((user) => user?.id === post.userId);
@@ -193,16 +195,31 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
               </p>
             </div>
             <div className="tags">
-              {modifiedTags.map((tag, index) => {
-                return (
-                  <span key={index} className={`default ${tag}`}>
-                    {tag}
-                  </span>
-                );
-              })}
-
+              <div className="tags-display">
+                {modifiedTags.map((tag, index) => {
+                  return (
+                    <span key={index} className={`default ${tag}`}>
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
               {checker ? (
-                <button className="add-new-tag-btn"> add new tag </button>
+                <>
+                  {tick ? null : (
+                    <button
+                      className="add-new-tag-btn"
+                      onClick={() => {
+                        setTick(!tick);
+                      }}
+                    >
+                      add new tag
+                    </button>
+                  )}
+                  {tick ? (
+                    <TagForm tick={tick} setTick={setTick} postId={post.id} />
+                  ) : null}
+                </>
               ) : null}
             </div>
           </div>
