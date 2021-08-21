@@ -305,7 +305,9 @@ const useStore = create<Store>((set, get) => ({
     })
       .then((resp) => resp.json())
 
-      .then((newTagFromServer) => {});
+      .then((newTagFromServer) => {
+        set({ tagLength: get().tagLength + 1 });
+      });
   },
   deleteTag: (id: number) => {
     return;

@@ -19,13 +19,10 @@ function Posts() {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
-    fetchTags();
-  }, [tagLength]);
-
-  useEffect(() => {
     fetchUsers();
     fetchPosts();
-  }, [posts.length]);
+    fetchTags();
+  }, [posts.length, tagLength]);
 
   console.log("tagLength", tagLength);
 
