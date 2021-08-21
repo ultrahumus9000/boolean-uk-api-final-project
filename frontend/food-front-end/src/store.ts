@@ -150,13 +150,13 @@ const useStore = create<Store>((set, get) => ({
   setActiveUser: (userId) => set({ activeUser: userId }),
 
   fetchUsers: () => {
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:4000/users")
       .then((resp) => resp.json())
       .then((users) => set({ users: users }));
   },
 
   createUser: (data) => {
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +170,7 @@ const useStore = create<Store>((set, get) => ({
     const id = Number(data?.id);
     console.log("130", id);
     console.log("130", id);
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`http://localhost:4000/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -190,7 +190,7 @@ const useStore = create<Store>((set, get) => ({
   },
   deleteUser: (id) => {
     id = Number(id);
-    return fetch(`http://localhost:3000/users/${id}`, {
+    return fetch(`http://localhost:4000/users/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -211,13 +211,13 @@ const useStore = create<Store>((set, get) => ({
   },
 
   fetchPosts: () => {
-    fetch("http://localhost:3000/posts")
+    fetch("http://localhost:4000/posts")
       .then((resp) => resp.json())
       .then((postsFromServer) => set({ posts: postsFromServer }));
   },
 
   createPost: (data) => {
-    fetch("http://localhost:3000/posts", {
+    fetch("http://localhost:4000/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -233,7 +233,7 @@ const useStore = create<Store>((set, get) => ({
   updatePost: (data) => {
     const id = data.id;
     console.log("update post", data);
-    fetch(`http://localhost:3000/posts/${id}`, {
+    fetch(`http://localhost:4000/posts/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -253,7 +253,7 @@ const useStore = create<Store>((set, get) => ({
   },
   deletePost: (id) => {
     id = Number(id);
-    fetch(`http://localhost:3000/posts/${id}`, {
+    fetch(`http://localhost:4000/posts/${id}`, {
       method: "DELETE",
     }).then(() => {
       console.log("deleted!!!");
@@ -263,12 +263,12 @@ const useStore = create<Store>((set, get) => ({
     });
   },
   fetchComments: () => {
-    fetch("http://localhost:3000/comments")
+    fetch("http://localhost:4000/comments")
       .then((resp) => resp.json())
       .then((commentsFromServer) => set({ comments: commentsFromServer }));
   },
   createComment: (data) => {
-    fetch("http://localhost:3000/comments", {
+    fetch("http://localhost:4000/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -282,12 +282,12 @@ const useStore = create<Store>((set, get) => ({
       );
   },
   deleteComment: (id) => {
-    fetch(`http://localhost:3000/comments/${id}`, {
+    fetch(`http://localhost:4000/comments/${id}`, {
       method: "DELETE",
     }).then(() => {});
   },
   fetchTags: () => {
-    fetch(`http://localhost:3000/tags/`)
+    fetch(`http://localhost:4000/tags/`)
       .then((resp) => resp.json())
       .then((tagsFromServer) => {
         set({ tags: tagsFromServer });
@@ -296,7 +296,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   creatTag: (data: TagForm) => {
-    fetch("http://localhost:3000/tags", {
+    fetch("http://localhost:4000/tags", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

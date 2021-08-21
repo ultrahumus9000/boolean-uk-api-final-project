@@ -23,14 +23,7 @@ const { errorHandler } = require("../helper");
 
 async function getAlltags(req, res) {
   try {
-    // const result = await tag.findMany();
-    // const secondResult = await postToTag.findMany();
-    // const fullResult = {
-    //   tags: result,
-    //   postToTags: secondResult,
-    // };
-    // res.json(fullResult);
-
+   
     const result = await post.findMany({
       select: {
         id: true,
