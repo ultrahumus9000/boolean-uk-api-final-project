@@ -1,8 +1,8 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import NewPostForm from "../components/NewPostForm";
-import { User } from "../store";
+import useStore, { User } from "../store";
 type HeaderProp = {
   users: User[];
   savedInfo: User;
@@ -10,11 +10,18 @@ type HeaderProp = {
 
 function Header({ users, savedInfo }: HeaderProp) {
   const [newPost, setNewPost] = useState(true);
+  const search = useStore((store) => store.search);
+  const setSearch = useStore((store) => store.setSearch);
   const history = useHistory();
   function toggleNewPostDisplay() {
     setNewPost(!newPost);
   }
 
+  function handleInput(e: SyntheticEvent) {
+    const targetEvent = e.target as HTMLInputElement;
+    setSearch(targetEvent.value);
+  }
+  console.log("search-bar", search);
   return (
     <header className={`${newPost ? "" : "shorter-header"}`}>
       <div className="profile">
@@ -54,7 +61,7 @@ function Header({ users, savedInfo }: HeaderProp) {
       </button>
       <section className="search-section">
         <form action="">
-          <input type="text" />
+          <input type="text" onInput={handleInput} />
           <label htmlFor="">Search</label>
         </form>
       </section>

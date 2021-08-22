@@ -127,6 +127,8 @@ type Store = {
   display: boolean;
   click: boolean;
   tick: boolean;
+  search: string;
+  setSearch: (arg: string) => void;
   userPosts: SinglePost[];
   toggleDisplay: () => void;
   toggleClick: () => void;
@@ -161,6 +163,11 @@ const useStore = create<Store>((set, get) => ({
   click: true,
   tick: false,
   userPosts: [],
+  search: "",
+  setSearch: (search) => {
+    set({ search });
+  },
+
   toggleDisplay: () => {
     set({ display: !get().display });
   },

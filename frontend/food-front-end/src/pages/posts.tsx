@@ -17,16 +17,33 @@ function Posts() {
   const tagLength = useStore((store) => store.tagLength);
   const fetchTags = useStore((store) => store.fetchTags);
   const display = useStore((store) => store.display);
-  const toggleDisplay = useStore((store) => store.toggleDisplay);
+  const search = useStore((store) => store.search);
 
   useEffect(() => {
     fetchUsers();
     fetchPosts();
     fetchTags();
-  }, [posts.length, tagLength]);
+  }, [posts.length, tagLength, search]);
 
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
+
+  let filteredPosts = posts;
+  if (search !== "") {
+    // can search username/post content/address
+    //tags are special, need know postToTag Id etc,which require backend coperation therefor we ignore for now
+    const targetUser = users.find((user) =>
+      user?.username.toLowerCase().includes(search.toLowerCase())
+    );
+
+    if (targetUser) {
+      filteredPosts = posts.filter((post) => post.userId === targetUser.id);
+    } else {
+      filteredPosts = posts.filter((post) =>
+        post.text_content.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+  }
 
   return (
     <>
@@ -38,7 +55,7 @@ function Posts() {
           <Header users={users} savedInfo={savedInfo} />
 
           <section className={`${display ? "feed" : "feed-mason"}`}>
-            {posts.map((post) => {
+            {filteredPosts.map((post) => {
               return (
                 <Post key={post.id} post={post} users={users} tags={tags} />
               );
