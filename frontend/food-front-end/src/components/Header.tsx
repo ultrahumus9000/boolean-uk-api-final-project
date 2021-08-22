@@ -52,6 +52,12 @@ function Header({ users, savedInfo }: HeaderProp) {
       >
         Log Out
       </button>
+      <section className="search-section">
+        <form action="">
+          <input type="text" />
+          <label htmlFor="">Search</label>
+        </form>
+      </section>
     </header>
   );
 }

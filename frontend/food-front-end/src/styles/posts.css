@@ -8,9 +8,40 @@ header {
   display: flex;
   height: fit-content;
   position: relative;
+  width: 100vw;
 }
 .shorter-header {
   max-height: 150px;
+  width: 100vw;
+}
+.search-section {
+  position: absolute;
+  right: 20px;
+  top: 220px;
+  z-index: 1;
+}
+.search-section form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 5px;
+  border: 4px solid black;
+  background-color: black;
+  color: aqua;
+  border-radius: 5px;
+  height: 50px;
+  align-content: center;
+  justify-items: center;
+}
+.search-section form input {
+  border: none;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding-left: 20px;
+  margin-left: 0px;
+}
+.search-section form label {
+  font-weight: bolder;
+  font-size: 2rem;
 }
 .logout-btn {
   position: absolute;

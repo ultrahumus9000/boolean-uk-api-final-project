@@ -22,6 +22,7 @@ function Post({ post, users, tags }: PostProps) {
   const click = useStore((store) => store.click);
   const toggleClick = useStore((store) => store.toggleClick);
   const tick = useStore((store) => store.tick);
+  const toggleTick = useStore((store) => store.toggleTick);
   const toggleDisplay = useStore((store) => store.toggleDisplay);
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
@@ -72,6 +73,7 @@ function Post({ post, users, tags }: PostProps) {
     }
   }
 
+  console.log("tick", tick);
   return (
     <article className={`${display ? "post" : "non-back"}`}>
       {display ? <UserForPost postUser={postUser} /> : null}
@@ -206,7 +208,7 @@ function Post({ post, users, tags }: PostProps) {
               {checker ? (
                 <>
                   {tick ? null : (
-                    <button className="add-new-tag-btn" onClick={toggleClick}>
+                    <button className="add-new-tag-btn" onClick={toggleTick}>
                       add new tag
                     </button>
                   )}
