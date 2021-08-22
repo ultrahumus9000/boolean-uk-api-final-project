@@ -58,12 +58,18 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
       {displayNewTagForm ? null : (
         <form className="tag-form form" onSubmit={handleTagForm}>
           <label htmlFor=""> Choose A Tag Below </label>
-          <div className="select-div">
-            <select name="select">
-              {tags.map((tag) => {
-                return <option value={tag}>{tag}</option>;
-              })}
-            </select>
+          <div className="checkboxs-div">
+            {tags.map((tag) => {
+              return (
+                <>
+                  <label className="checkbox-label">
+                    <span>{tag}</span>
+                    <input type="checkbox" value={tag} name={tag} />
+                  </label>
+                </>
+              );
+            })}
+
             <button type="submit">Submit</button>
           </div>
           <button className="display-more-tag-form-btn" onClick={toggleDisplay}>

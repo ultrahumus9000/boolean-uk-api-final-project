@@ -382,6 +382,15 @@ img.post_avatar {
   background: rgb(153, 214, 184);
   color: black;
 }
+
+.checkbox-label {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  align-items: center;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
 @media only screen and (max-width: 1300px) {
   header {
     flex-direction: column;

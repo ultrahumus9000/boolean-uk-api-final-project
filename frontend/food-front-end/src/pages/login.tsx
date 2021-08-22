@@ -27,7 +27,7 @@ function Login() {
   // const activeUserInfo = users.find((user) => user?.id === activeUser);
 
   function frontendCheckUser(data: CheckUser) {
-    fetch("http://localhost:3000/users/user", {
+    fetch("http://localhost:4000/users/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,6 +35,7 @@ function Login() {
       body: JSON.stringify(data),
     })
       .then((resp) => {
+        localStorage.clear();
         return resp.json();
       })
       .then((dataCheckResult) => {
