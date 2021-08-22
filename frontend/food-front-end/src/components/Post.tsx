@@ -37,7 +37,6 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
     return null;
   }
   const tagInfo = tags.filter((tag) => tag.postId === post.id);
-  console.log(tagInfo);
 
   const modifiedTags = tagInfo[0]?.tags.map((singleTag) => singleTag) || [];
 

@@ -92,7 +92,7 @@ type updatePost = {
 //   postToTags PostToTag[]
 // }
 
-export type TagForm = {
+export type NewTagForm = {
   postId: number;
   type: string;
 };
@@ -136,7 +136,7 @@ type Store = {
   createComment: (arg: newCommentForm) => void;
   deleteComment: (id: number) => void;
   fetchTags: () => void;
-  creatTag: (data: TagForm) => void;
+  creatTag: (data: NewTagForm) => void;
   deleteTag: (id: number) => void;
 };
 
@@ -295,7 +295,7 @@ const useStore = create<Store>((set, get) => ({
         set({ tagLength: newTagLength });
       });
   },
-  creatTag: (data: TagForm) => {
+  creatTag: (data: NewTagForm) => {
     fetch("http://localhost:4000/tags", {
       method: "POST",
       headers: {

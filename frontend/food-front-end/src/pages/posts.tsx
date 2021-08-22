@@ -24,8 +24,6 @@ function Posts() {
     fetchTags();
   }, [posts.length, tagLength]);
 
-  console.log("tagLength", tagLength);
-
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
