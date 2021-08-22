@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLinkProps } from "react-router-dom";
 import create from "zustand";
 
 function calculateTagLength(tagsFromServer: Tag[]) {
@@ -92,7 +93,7 @@ type updatePost = {
 //   postToTags PostToTag[]
 // }
 
-export type TagForm = {
+export type NewTagForm = {
   postId: number;
   type: string;
 };
@@ -123,6 +124,14 @@ type Store = {
   activeUser: number;
   tags: Tag[];
   tagLength: number;
+  display: boolean;
+  click: boolean;
+  tick: boolean;
+  userPosts: SinglePost[];
+  toggleDisplay: () => void;
+  toggleClick: () => void;
+  toggleTick: () => void;
+  setFalse: () => void;
   setActiveUser: (arg: number) => void;
   fetchUsers: () => void;
   createUser: (data: newUserFrom) => void;
@@ -136,8 +145,9 @@ type Store = {
   createComment: (arg: newCommentForm) => void;
   deleteComment: (id: number) => void;
   fetchTags: () => void;
-  creatTag: (data: TagForm) => void;
+  creatTag: (data: NewTagForm) => void;
   deleteTag: (id: number) => void;
+  fectchPostByUserId: (id: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -147,6 +157,22 @@ const useStore = create<Store>((set, get) => ({
   activeUser: 0,
   tags: [],
   tagLength: 0,
+  display: false,
+  click: true,
+  tick: false,
+  userPosts: [],
+  toggleDisplay: () => {
+    set({ display: !get().display });
+  },
+  toggleClick: () => {
+    set({ click: !get().click });
+  },
+  toggleTick: () => {
+    set({ tick: !get().tick });
+  },
+  setFalse: () => {
+    set({ tick: false });
+  },
   setActiveUser: (userId) => set({ activeUser: userId }),
 
   fetchUsers: () => {
@@ -168,8 +194,6 @@ const useStore = create<Store>((set, get) => ({
   },
   updateUser: (data) => {
     const id = Number(data?.id);
-    console.log("130", id);
-    console.log("130", id);
     fetch(`http://localhost:4000/users/${id}`, {
       method: "PATCH",
       headers: {
@@ -295,7 +319,7 @@ const useStore = create<Store>((set, get) => ({
         set({ tagLength: newTagLength });
       });
   },
-  creatTag: (data: TagForm) => {
+  creatTag: (data: NewTagForm) => {
     fetch("http://localhost:4000/tags", {
       method: "POST",
       headers: {
@@ -311,6 +335,17 @@ const useStore = create<Store>((set, get) => ({
   },
   deleteTag: (id: number) => {
     return;
+  },
+  fectchPostByUserId: (id: number) => {
+    fetch(`http://localhost:4000/users/${id}`)
+      .then((resp) => resp.json())
+      .then((posts) => {
+        if (typeof posts === "string") {
+          return;
+        } else {
+          set({ userPosts: posts });
+        }
+      });
   },
 }));
 

@@ -10,18 +10,19 @@ import TagForm from "./TagForm";
 type PostProps = {
   post: SinglePost;
   users: User[];
-  display: boolean;
-  handleDisplay: () => void;
   tags: Tag[] | undefined;
 };
 
 type Comments = SingleComment[];
 
-function Post({ post, users, display, handleDisplay, tags }: PostProps) {
+function Post({ post, users, tags }: PostProps) {
   const comments = useStore((store) => store.comments);
   const updatePost = useStore((store) => store.updatePost);
-  const [click, setClick] = useState(true);
-  const [tick, setTick] = useState(false);
+  const display = useStore((store) => store.display);
+  const click = useStore((store) => store.click);
+  const toggleClick = useStore((store) => store.toggleClick);
+  const tick = useStore((store) => store.tick);
+  const toggleDisplay = useStore((store) => store.toggleDisplay);
   const deletePost = useStore((store) => store.deletePost);
   const fetchComments = useStore((store) => store.fetchComments);
   const postUser = users.find((user) => user?.id === post.userId);
@@ -37,7 +38,6 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
     return null;
   }
   const tagInfo = tags.filter((tag) => tag.postId === post.id);
-  console.log(tagInfo);
 
   const modifiedTags = tagInfo[0]?.tags.map((singleTag) => singleTag) || [];
 
@@ -54,8 +54,7 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
   }
 
   function changeLike() {
-    setClick(!click);
-    console.log("click", click);
+    toggleClick();
 
     if (click) {
       let updateInfo = {
@@ -102,7 +101,7 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
         className="post_picture"
         src={post.picture}
         alt="foopicture"
-        onClick={handleDisplay}
+        onClick={toggleDisplay}
       ></img>
       {display ? (
         <>
@@ -207,18 +206,11 @@ function Post({ post, users, display, handleDisplay, tags }: PostProps) {
               {checker ? (
                 <>
                   {tick ? null : (
-                    <button
-                      className="add-new-tag-btn"
-                      onClick={() => {
-                        setTick(!tick);
-                      }}
-                    >
+                    <button className="add-new-tag-btn" onClick={toggleClick}>
                       add new tag
                     </button>
                   )}
-                  {tick ? (
-                    <TagForm tick={tick} setTick={setTick} postId={post.id} />
-                  ) : null}
+                  {tick ? <TagForm postId={post.id} /> : null}
                 </>
               ) : null}
             </div>

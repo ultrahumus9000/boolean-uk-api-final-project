@@ -16,7 +16,8 @@ function Posts() {
   const tags = useStore((store) => store.tags);
   const tagLength = useStore((store) => store.tagLength);
   const fetchTags = useStore((store) => store.fetchTags);
-  const [display, setDisplay] = useState(false);
+  const display = useStore((store) => store.display);
+  const toggleDisplay = useStore((store) => store.toggleDisplay);
 
   useEffect(() => {
     fetchUsers();
@@ -24,16 +25,9 @@ function Posts() {
     fetchTags();
   }, [posts.length, tagLength]);
 
-  console.log("tagLength", tagLength);
-
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
-  function handleDisplay() {
-    setDisplay(!display);
-  }
-
-  // console.log("tagLength", tagLength);
   return (
     <>
       <Headline />
@@ -46,14 +40,7 @@ function Posts() {
           <section className={`${display ? "feed" : "feed-mason"}`}>
             {posts.map((post) => {
               return (
-                <Post
-                  key={post.id}
-                  post={post}
-                  users={users}
-                  display={display}
-                  handleDisplay={handleDisplay}
-                  tags={tags}
-                />
+                <Post key={post.id} post={post} users={users} tags={tags} />
               );
             })}
           </section>

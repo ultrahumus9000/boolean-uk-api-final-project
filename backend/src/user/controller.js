@@ -92,10 +92,34 @@ async function checkUser(req, res) {
   }
 }
 
+async function findPostsByUserId(req, res) {
+  const userId = Number(req.params.userId);
+  try {
+    if (await idExsitingchecker(user, userId)) {
+      const result = await user.findUnique({
+        where: {
+          id: userId,
+        },
+        select: {
+          posts: true,
+        },
+      });
+
+      res.json(result.posts);
+    } else {
+      throw "user doesnt exist";
+    }
+  } catch (error) {
+    console.log(error);
+    res.json(errorHandler(error));
+  }
+}
+
 module.exports = {
   getAllUser,
   postOneUser,
   editUserProfile,
   deleteOneUser,
   checkUser,
+  findPostsByUserId,
 };

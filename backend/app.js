@@ -17,5 +17,8 @@ app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 app.use("/tags", tagRouter);
+app.all("*", () => {
+  console.log("wrong path");
+});
 
 module.exports = app;

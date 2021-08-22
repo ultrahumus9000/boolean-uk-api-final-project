@@ -1,17 +1,19 @@
 import React, { SyntheticEvent } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import useStore from "../store";
+import useStore, { NewTagForm } from "../store";
 
 type TagFormProps = {
-  tick: boolean;
-  setTick: (arg: boolean) => void;
   postId: number;
 };
 
-export default function TagForm({ tick, setTick, postId }: TagFormProps) {
+export default function TagForm({ postId }: TagFormProps) {
   const [displayNewTagForm, setDisplayNewTagFrom] = useState(false);
+  const tick = useStore((store) => store.tick);
+  const setTickFalse = useStore((store) => store.setFalse);
+  const toggleTick = useStore((store) => store.toggleTick);
   const [tags, setTags] = useState([]);
+  const [newTags, setNewTags] = useState<NewTagForm[]>([]);
   const createTag = useStore((store) => store.creatTag);
   useEffect(() => {
     fetch("http://localhost:4000/tags/types")
@@ -21,20 +23,13 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
       });
   }, []);
 
-  function toggleTick() {
-    setTick(!tick);
-  }
-
-  function handleTagForm(e: SyntheticEvent) {
+  async function handleTagForm(e: SyntheticEvent) {
     e.preventDefault();
     const targetEvent = e.target as HTMLFormElement;
-
-    const newTag = {
-      postId,
-      type: targetEvent.select.value,
-    };
-    createTag(newTag);
-    setTick(false);
+    for await (const newTag of newTags) {
+      await createTag(newTag);
+    }
+    setTickFalse();
   }
 
   function handleNewTagForm(e: SyntheticEvent) {
@@ -45,12 +40,30 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
       postId,
       type: targetEvent.input.value,
     };
+
     createTag(newTag);
-    setTick(false);
+    setTickFalse();
   }
 
   function toggleDisplay() {
     setDisplayNewTagFrom(!displayNewTagForm);
+  }
+
+  function checkBoxTick(e: SyntheticEvent) {
+    const targetEvent = e.target as HTMLInputElement;
+
+    if (targetEvent.checked) {
+      const newTag = {
+        postId,
+        type: targetEvent.value,
+      };
+      setNewTags([...newTags, newTag]);
+    } else {
+      const filtedTags = newTags.filter(
+        (tag) => tag.type !== targetEvent.value
+      );
+      setNewTags(filtedTags);
+    }
   }
 
   return (
@@ -58,12 +71,23 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
       {displayNewTagForm ? null : (
         <form className="tag-form form" onSubmit={handleTagForm}>
           <label htmlFor=""> Choose A Tag Below </label>
-          <div className="select-div">
-            <select name="select">
-              {tags.map((tag) => {
-                return <option value={tag}>{tag}</option>;
-              })}
-            </select>
+          <div className="checkboxs-div">
+            {tags.map((tag) => {
+              return (
+                <>
+                  <label className="checkbox-label">
+                    <span>{tag}</span>
+                    <input
+                      type="checkbox"
+                      value={tag}
+                      name={tag}
+                      onClick={checkBoxTick}
+                    />
+                  </label>
+                </>
+              );
+            })}
+
             <button type="submit">Submit</button>
           </div>
           <button className="display-more-tag-form-btn" onClick={toggleDisplay}>

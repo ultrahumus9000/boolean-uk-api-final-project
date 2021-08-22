@@ -18,7 +18,14 @@ function Header({ users, savedInfo }: HeaderProp) {
   return (
     <header className={`${newPost ? "" : "shorter-header"}`}>
       <div className="profile">
-        <img className="avatar" src={savedInfo?.avatar} alt="user avatar"></img>
+        <img
+          className="avatar"
+          src={savedInfo?.avatar}
+          alt="user avatar"
+          onClick={() => {
+            history.push(`/posts/${savedInfo?.id}`);
+          }}
+        ></img>
         <h3 className="name">{savedInfo?.username}</h3>
         <div className="head-buttons">
           <button
