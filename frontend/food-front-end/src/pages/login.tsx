@@ -3,7 +3,7 @@ import "../styles/login.css";
 import React, { SyntheticEvent } from "react";
 
 import { Link, useHistory } from "react-router-dom";
-import { User } from "../store";
+
 import { useEffect } from "react";
 import useStore from "../store";
 import Headline from "../components/Headline";

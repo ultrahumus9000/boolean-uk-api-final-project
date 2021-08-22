@@ -4,13 +4,14 @@ import { useState } from "react";
 import useStore, { NewTagForm } from "../store";
 
 type TagFormProps = {
-  tick: boolean;
-  setTick: (arg: boolean) => void;
   postId: number;
 };
 
-export default function TagForm({ tick, setTick, postId }: TagFormProps) {
+export default function TagForm({ postId }: TagFormProps) {
   const [displayNewTagForm, setDisplayNewTagFrom] = useState(false);
+  const tick = useStore((store) => store.tick);
+  const setTickFalse = useStore((store) => store.setFalse);
+  const toggleTick = useStore((store) => store.toggleTick);
   const [tags, setTags] = useState([]);
   const [newTags, setNewTags] = useState<NewTagForm[]>([]);
   const createTag = useStore((store) => store.creatTag);
@@ -22,18 +23,13 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
       });
   }, []);
 
-  function toggleTick() {
-    setTick(!tick);
-  }
-
   async function handleTagForm(e: SyntheticEvent) {
     e.preventDefault();
     const targetEvent = e.target as HTMLFormElement;
     for await (const newTag of newTags) {
       await createTag(newTag);
     }
-
-    setTick(false);
+    setTickFalse();
   }
 
   function handleNewTagForm(e: SyntheticEvent) {
@@ -46,7 +42,7 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
     };
 
     createTag(newTag);
-    setTick(false);
+    setTickFalse();
   }
 
   function toggleDisplay() {
@@ -55,7 +51,7 @@ export default function TagForm({ tick, setTick, postId }: TagFormProps) {
 
   function checkBoxTick(e: SyntheticEvent) {
     const targetEvent = e.target as HTMLInputElement;
-    console.log("haha");
+
     if (targetEvent.checked) {
       const newTag = {
         postId,

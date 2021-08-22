@@ -37,6 +37,17 @@ header {
   width: 100vw;
   overflow: scroll;
 }
+.other-profile-page {
+  display: grid;
+  justify-items: center;
+}
+.other-profile-page h2 {
+  margin: 20px;
+  background-color: paleturquoise;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 4px solid black;
+}
 .profile {
   display: grid;
   grid-template:

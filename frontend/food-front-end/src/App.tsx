@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Posts from "./pages/posts";
 import Profile from "./pages/profile";
+import OtherUserPage from "./pages/OtherUserPage";
 
 function App() {
   return (
@@ -13,7 +14,6 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Login />
-          {/* {loggedIn ? <Redirect to="/posts" /> : <Signup />} */}
         </Route>
         <Route path="/signup" exact>
           <Signup />
@@ -23,6 +23,9 @@ function App() {
         </Route>
         <Route path="/profile" exact>
           <Profile />
+        </Route>
+        <Route path="/posts/:userId" exact>
+          <OtherUserPage />
         </Route>
       </Switch>
     </Router>
