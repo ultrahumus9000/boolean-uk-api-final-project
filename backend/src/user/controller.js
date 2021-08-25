@@ -76,7 +76,6 @@ async function findPostsByUserId(req, res) {
           posts: true,
         },
       });
-
       res.json(result.posts);
     } else {
       throw new Error("user doesnt exist");

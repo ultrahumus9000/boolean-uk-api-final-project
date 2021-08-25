@@ -5,13 +5,17 @@ async function getModifiedUserInfo(user) {
   const { username, password } = user;
 
   const result = await db.user.findUnique({
-    where: username,
+    where: {
+      username,
+    },
   });
 
   if (!result) {
     throw new Error("username doesnt exist ");
   }
-  const secondCheck = await compare(password, user.password);
+
+  const secondCheck = await compare(password, result.password);
+
   if (secondCheck) {
     return result;
   } else {

@@ -33,12 +33,15 @@ function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => {
+        console.log("resp", resp);
         localStorage.clear();
         return resp.json();
       })
       .then((dataCheckResult) => {
+        console.log(dataCheckResult);
         StoreUser(JSON.stringify(dataCheckResult));
         setActiveUser(dataCheckResult.id);
         history.push("/posts");
