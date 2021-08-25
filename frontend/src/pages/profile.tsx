@@ -30,11 +30,13 @@ function Profile() {
     }, 1500);
   }
 
+  console.log(savedInfo);
   function handleChange(event: SyntheticEvent) {
     const targetEvent = event.target as HTMLInputElement;
 
     const key = targetEvent.name;
     let newForm = savedInfo;
+
     switch (key) {
       case "avatar":
         newForm = { ...savedInfo, avatar: targetEvent.value };

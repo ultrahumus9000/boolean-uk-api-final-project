@@ -54,7 +54,7 @@ function Header({ users, savedInfo }: HeaderProp) {
         className="logout-btn"
         onClick={() => {
           localStorage.clear();
-          history.push("/");
+          history.push("/login");
         }}
       >
         Log Out
