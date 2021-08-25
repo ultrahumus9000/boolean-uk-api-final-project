@@ -2,6 +2,8 @@ const e = require("express");
 const { user, archive } = require("../../database");
 const { errorHandler, idExsitingchecker } = require("../helper");
 
+const { create } = require("./service");
+
 async function getAllUser(req, res) {
   try {
     const result = await user.findMany();
@@ -13,21 +15,17 @@ async function getAllUser(req, res) {
 }
 async function postOneUser(req, res) {
   try {
-    const userInfo = await user.create({
-      data: req.body,
-    });
-    console.log("post create useinfo 13", userInfo);
-
-    const result = await archive.create({
+    const userInfo = await create(req.body);
+    await archive.create({
       data: {
         userId: userInfo.id,
       },
     });
-    console.log("archive 20", result);
+
     res.json(userInfo);
   } catch (error) {
     console.log(error);
-    res.json(errorHandler(error));
+    res.json(error.message);
   }
 }
 
@@ -45,11 +43,10 @@ async function editUserProfile(req, res) {
 
       res.json(result);
     } else {
-      res.json("there isnt the user you provided");
+      throw new Error("there isnt the user you provided");
     }
   } catch (error) {
     console.log(error);
-    res.json(errorHandler(error));
   }
 }
 
@@ -63,32 +60,7 @@ async function deleteOneUser(req, res) {
     });
   } catch (error) {
     console.log(error);
-    res.json(errorHandler(error));
-  }
-}
-
-async function checkUser(req, res) {
-  const { username, password } = req.body;
-  try {
-    const result = await user.findUnique({
-      where: {
-        username,
-      },
-    });
-    if (result === null) {
-      res.json("username is not valid");
-    } else {
-      let passwordChecker = password === result.password;
-      if (!passwordChecker) {
-        res.json("password doesnt match the account");
-      } else {
-        res.json(result);
-        console.log(result);
-      }
-    }
-  } catch (error) {
-    console.log(error);
-    res.json(errorHandler(error));
+    res.json(error.message);
   }
 }
 
@@ -107,11 +79,10 @@ async function findPostsByUserId(req, res) {
 
       res.json(result.posts);
     } else {
-      throw "user doesnt exist";
+      throw new Error("user doesnt exist");
     }
   } catch (error) {
-    console.log(error);
-    res.json(errorHandler(error));
+    res.json(error.message);
   }
 }
 
@@ -120,6 +91,5 @@ module.exports = {
   postOneUser,
   editUserProfile,
   deleteOneUser,
-  checkUser,
   findPostsByUserId,
 };

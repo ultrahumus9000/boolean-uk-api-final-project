@@ -27,7 +27,7 @@ function Login() {
   // const activeUserInfo = users.find((user) => user?.id === activeUser);
 
   function frontendCheckUser(data: CheckUser) {
-    fetch("http://localhost:4000/users/user", {
+    fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,19 +39,9 @@ function Login() {
         return resp.json();
       })
       .then((dataCheckResult) => {
-        switch (dataCheckResult) {
-          case "username is not valid":
-            alert("username is not valid");
-            break;
-          case "password doesnt match the account":
-            alert("password doesnt match the account");
-            break;
-          default:
-            StoreUser(JSON.stringify(dataCheckResult));
-            setActiveUser(dataCheckResult.id);
-            history.push("/posts");
-            break;
-        }
+        StoreUser(JSON.stringify(dataCheckResult));
+        setActiveUser(dataCheckResult.id);
+        history.push("/posts");
       });
   }
 
