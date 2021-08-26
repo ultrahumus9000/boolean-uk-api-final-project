@@ -187,7 +187,7 @@ const useStore = create<Store>((set, get) => ({
   },
 
   createUser: (data) => {
-    fetch("http://localhost:4000/users", {
+    fetch("http://localhost:4000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

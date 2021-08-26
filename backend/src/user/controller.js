@@ -23,14 +23,15 @@ async function postOneUser(req, res) {
       },
     });
 
-    const token = createToken({
-      id: userInfo.id,
-      username: userInfo.username,
-    });
+    // const token = createToken({
+    //   id: userInfo.id,
+    //   username: userInfo.username,
+    // });
 
     // This creates a cookie that can't be accessed by Javascript in the Frontend
     // httpOnly: true
-    res.cookie("token", token, { httpOnly: true });
+    // res.cookie("token", token, { httpOnly: true });
+
     res.json(userInfo);
   } catch (error) {
     console.log(error);

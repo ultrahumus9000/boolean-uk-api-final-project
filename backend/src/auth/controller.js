@@ -10,7 +10,7 @@ async function validateUser(req, res) {
     });
 
     res.cookie("token", token, { httpOnly: true });
-    console.log("i am inside");
+
     res.json({
       id: result.id,
       username: result.username,

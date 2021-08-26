@@ -36,15 +36,17 @@ function Login() {
       credentials: "include",
     })
       .then((resp) => {
-        console.log("resp", resp);
         localStorage.clear();
         return resp.json();
       })
       .then((dataCheckResult) => {
-        console.log(dataCheckResult);
-        StoreUser(JSON.stringify(dataCheckResult));
-        setActiveUser(dataCheckResult.id);
-        history.push("/posts");
+        if (typeof dataCheckResult === "string") {
+          alert("user info doesnt match");
+        } else {
+          StoreUser(JSON.stringify(dataCheckResult));
+          setActiveUser(dataCheckResult.id);
+          history.push("/posts");
+        }
       });
   }
 

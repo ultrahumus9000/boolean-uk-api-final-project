@@ -20,7 +20,7 @@ function SignUpForm() {
     };
     createUser(newUser);
     targetEvent.reset();
-    history.push("/");
+    history.push("/login");
   }
 
   return (
