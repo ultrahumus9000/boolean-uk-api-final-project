@@ -7,8 +7,10 @@ import Signup from "./pages/signup";
 import Posts from "./pages/posts";
 import Profile from "./pages/profile";
 import OtherUserPage from "./pages/OtherUserPage";
+import useStore from "./store";
 
 function App() {
+  const users = useStore((store) => store.activeUser);
   return (
     <Router>
       <Switch>

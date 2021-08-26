@@ -17,7 +17,6 @@ function CommentForm({ postId }: IdProps) {
 
     const newComment = {
       content: targetEvent.comment.value,
-      userId: savedInfo.id,
       postId: postId,
     };
 

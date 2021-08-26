@@ -11,9 +11,13 @@ async function getAllcomments(req, res) {
   }
 }
 async function commentOnecomment(req, res) {
+  const currentUser = req.currentUser;
   try {
     const commentInfo = await comment.create({
-      data: req.body,
+      data: {
+        ...req.body,
+        userId: currentUser.id,
+      },
     });
     res.json(commentInfo);
   } catch (error) {

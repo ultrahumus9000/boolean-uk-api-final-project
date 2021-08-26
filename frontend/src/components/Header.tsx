@@ -10,7 +10,6 @@ type HeaderProp = {
 
 function Header({ users, savedInfo }: HeaderProp) {
   const [newPost, setNewPost] = useState(true);
-  const search = useStore((store) => store.search);
   const setSearch = useStore((store) => store.setSearch);
   const history = useHistory();
   function toggleNewPostDisplay() {
@@ -21,7 +20,14 @@ function Header({ users, savedInfo }: HeaderProp) {
     const targetEvent = e.target as HTMLInputElement;
     setSearch(targetEvent.value);
   }
-  console.log("search-bar", search);
+
+  function handleLogout() {
+    localStorage.clear();
+    fetch("http://localhost:4000/logout").then(() => {
+      history.push("/login");
+    });
+  }
+
   return (
     <header className={`${newPost ? "" : "shorter-header"}`}>
       <div className="profile">
@@ -50,13 +56,7 @@ function Header({ users, savedInfo }: HeaderProp) {
 
       {newPost && <NewPostForm />}
 
-      <button
-        className="logout-btn"
-        onClick={() => {
-          localStorage.clear();
-          history.push("/login");
-        }}
-      >
+      <button className="logout-btn" onClick={handleLogout}>
         Log Out
       </button>
       <section className="search-section">

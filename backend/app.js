@@ -1,5 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
+const cookieParser = require("cookie-parser");
 var cors = require("cors");
 
 const userRouter = require("./src/user/router");
@@ -7,13 +8,29 @@ const postRouter = require("./src/post/router");
 const commentRouter = require("./src/comment/router");
 const tagRouter = require("./src/tags/router");
 const authRouter = require("./src/auth/router");
+const { validateToken } = require("./authgenerator");
 var app = express();
+
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cookieParser());
 
-app.use("/login", authRouter);
+app.use(authRouter);
+
+app.use((req, res, next) => {
+  const { token } = req.cookies;
+
+  const userInfo = token && validateToken(token);
+
+  if (userInfo) {
+    req.currentUser = userInfo;
+    next();
+  } else {
+    res.json("you aren't the user");
+  }
+});
 
 app.use("/users", userRouter);
 app.use("/posts", postRouter);

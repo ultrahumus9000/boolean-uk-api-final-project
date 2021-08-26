@@ -11,13 +11,15 @@ async function getAllposts(req, res) {
   }
 }
 async function postOnepost(req, res) {
-  console.log("before post 13", req.body);
+  const currentUser = req.currentUser;
   try {
     const userInfo = await post.create({
-      data: req.body,
+      data: {
+        ...req.body,
+        userId: currentUser.id,
+      },
     });
     res.json(userInfo);
-    console.log("line 19", userInfo);
   } catch (error) {
     console.log(error);
     res.json(errorHandler(error));

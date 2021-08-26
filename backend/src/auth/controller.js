@@ -1,8 +1,16 @@
 const getModifiedUserInfo = require("./service");
+const { createToken } = require("../../authgenerator");
 
 async function validateUser(req, res) {
   try {
     const result = await getModifiedUserInfo(req.body);
+    const token = createToken({
+      id: result.id,
+      username: result.username,
+    });
+
+    res.cookie("token", token, { httpOnly: true });
+    console.log("i am inside");
     res.json({
       id: result.id,
       username: result.username,
@@ -16,4 +24,10 @@ async function validateUser(req, res) {
   }
 }
 
-module.exports = { validateUser };
+async function logoutUser(req, res) {
+  res.clearCookie("token");
+  //   console.log("line 30", req.cookies);
+  res.json("you have log out");
+}
+
+module.exports = { validateUser, logoutUser };

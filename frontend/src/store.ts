@@ -44,7 +44,6 @@ export type SingleComment = {
 
 export type newCommentForm = {
   content: string;
-  userId: number;
   postId: number;
 };
 
@@ -70,7 +69,6 @@ type newPostForm = {
   picture: string;
   likes: number;
   address: string | null;
-  userId: number;
 };
 type updatePost = {
   id: number;
@@ -183,7 +181,7 @@ const useStore = create<Store>((set, get) => ({
   setActiveUser: (userId) => set({ activeUser: userId }),
 
   fetchUsers: () => {
-    fetch("http://localhost:4000/users")
+    fetch("http://localhost:4000/users", { credentials: "include" })
       .then((resp) => resp.json())
       .then((users) => set({ users: users }));
   },
@@ -195,6 +193,7 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
       .then((newUser) => set({ users: [...get().users, newUser] }));
@@ -205,6 +204,7 @@ const useStore = create<Store>((set, get) => ({
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        credentials: "include",
       },
       body: JSON.stringify(data),
     })
@@ -223,6 +223,7 @@ const useStore = create<Store>((set, get) => ({
     id = Number(id);
     return fetch(`http://localhost:4000/users/${id}`, {
       method: "DELETE",
+      credentials: "include",
     })
       .then(() => {
         const updateUsers = get().users.filter((user) => user?.id !== id);
@@ -242,7 +243,9 @@ const useStore = create<Store>((set, get) => ({
   },
 
   fetchPosts: () => {
-    fetch("http://localhost:4000/posts")
+    fetch("http://localhost:4000/posts", {
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((postsFromServer) => set({ posts: postsFromServer }));
   },
@@ -254,6 +257,7 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
 
@@ -270,6 +274,7 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
       .then((data) => {
@@ -286,6 +291,7 @@ const useStore = create<Store>((set, get) => ({
     id = Number(id);
     fetch(`http://localhost:4000/posts/${id}`, {
       method: "DELETE",
+      credentials: "include",
     }).then(() => {
       console.log("deleted!!!");
       const updatedPosts = get().posts.filter((post) => post.id !== id);
@@ -294,7 +300,9 @@ const useStore = create<Store>((set, get) => ({
     });
   },
   fetchComments: () => {
-    fetch("http://localhost:4000/comments")
+    fetch("http://localhost:4000/comments", {
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((commentsFromServer) => set({ comments: commentsFromServer }));
   },
@@ -305,6 +313,7 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
 
@@ -315,10 +324,13 @@ const useStore = create<Store>((set, get) => ({
   deleteComment: (id) => {
     fetch(`http://localhost:4000/comments/${id}`, {
       method: "DELETE",
+      credentials: "include",
     }).then(() => {});
   },
   fetchTags: () => {
-    fetch(`http://localhost:4000/tags/`)
+    fetch(`http://localhost:4000/tags/`, {
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((tagsFromServer) => {
         set({ tags: tagsFromServer });
@@ -333,6 +345,7 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
 
@@ -344,7 +357,9 @@ const useStore = create<Store>((set, get) => ({
     return;
   },
   fectchPostByUserId: (id: number) => {
-    fetch(`http://localhost:4000/users/${id}`)
+    fetch(`http://localhost:4000/users/${id}`, {
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((posts) => {
         if (typeof posts === "string") {

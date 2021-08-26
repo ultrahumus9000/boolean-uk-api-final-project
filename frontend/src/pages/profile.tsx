@@ -22,7 +22,7 @@ function Profile() {
   function handleClick() {
     setEditForm(!editForm);
   }
-
+  console.log(savedInfo);
   function deleteAccount() {
     deleteUser(savedInfo.id);
     setTimeout(() => {
@@ -30,7 +30,6 @@ function Profile() {
     }, 1500);
   }
 
-  console.log(savedInfo);
   function handleChange(event: SyntheticEvent) {
     const targetEvent = event.target as HTMLInputElement;
 

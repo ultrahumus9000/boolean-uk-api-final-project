@@ -13,6 +13,7 @@ async function getAllUser(req, res) {
     res.json(errorHandler(error));
   }
 }
+
 async function postOneUser(req, res) {
   try {
     const userInfo = await create(req.body);
@@ -22,6 +23,14 @@ async function postOneUser(req, res) {
       },
     });
 
+    const token = createToken({
+      id: userInfo.id,
+      username: userInfo.username,
+    });
+
+    // This creates a cookie that can't be accessed by Javascript in the Frontend
+    // httpOnly: true
+    res.cookie("token", token, { httpOnly: true });
     res.json(userInfo);
   } catch (error) {
     console.log(error);
@@ -30,13 +39,12 @@ async function postOneUser(req, res) {
 }
 
 async function editUserProfile(req, res) {
-  console.log(req.params.id);
-  const userId = Number(req.params.id);
+  const currentUser = req.currentUser;
   try {
     if (await idExsitingchecker(user, userId)) {
       const result = await user.update({
         where: {
-          id: userId,
+          id: currentUser.id,
         },
         data: req.body,
       });
@@ -51,11 +59,11 @@ async function editUserProfile(req, res) {
 }
 
 async function deleteOneUser(req, res) {
-  const id = Number(req.params.id);
+  const currentUser = req.currentUser;
   try {
     await user.delete({
       where: {
-        id,
+        id: currentUser.id,
       },
     });
   } catch (error) {
@@ -66,6 +74,7 @@ async function deleteOneUser(req, res) {
 
 async function findPostsByUserId(req, res) {
   const userId = Number(req.params.userId);
+
   try {
     if (await idExsitingchecker(user, userId)) {
       const result = await user.findUnique({
@@ -87,8 +96,8 @@ async function findPostsByUserId(req, res) {
 
 module.exports = {
   getAllUser,
-  postOneUser,
   editUserProfile,
   deleteOneUser,
   findPostsByUserId,
+  postOneUser,
 };
