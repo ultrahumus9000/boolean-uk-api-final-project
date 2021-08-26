@@ -23,7 +23,9 @@ function Header({ users, savedInfo }: HeaderProp) {
 
   function handleLogout() {
     localStorage.clear();
-    fetch("http://localhost:4000/logout").then(() => {
+    fetch("http://localhost:4000/logout", {
+      credentials: "include",
+    }).then(() => {
       history.push("/login");
     });
   }

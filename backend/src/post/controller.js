@@ -27,7 +27,7 @@ async function postOnepost(req, res) {
 }
 async function deleteOnepost(req, res) {
   const id = Number(req.params.id);
-  console.log(id);
+
   try {
     await post.delete({
       where: {
