@@ -200,16 +200,19 @@ const useStore = create<Store>((set, get) => ({
   },
   updateUser: (data) => {
     const id = Number(data?.id);
-    fetch(`http://localhost:4000/users/${id}`, {
+    console.log(data);
+    fetch(`http://localhost:4000/users`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         credentials: "include",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
       .then((data) => {
+        console.log("line 214", data);
         let updatedUsers = get().users.map((user) => {
           if (user?.id === id) {
             return data;

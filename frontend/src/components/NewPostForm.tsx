@@ -31,7 +31,6 @@ function NewPostForm() {
       picture: targetEvent.picture.value,
       text_content: targetEvent.text_content.value,
       address: newAddress,
-      userId: savedInfo.id,
     };
 
     createPost(newPost);

@@ -42,7 +42,7 @@ async function postOneUser(req, res) {
 async function editUserProfile(req, res) {
   const currentUser = req.currentUser;
   try {
-    if (await idExsitingchecker(user, userId)) {
+    if (await idExsitingchecker(user, currentUser.id)) {
       const result = await user.update({
         where: {
           id: currentUser.id,

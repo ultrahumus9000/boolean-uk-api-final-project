@@ -22,7 +22,7 @@ function Profile() {
   function handleClick() {
     setEditForm(!editForm);
   }
-  console.log(savedInfo);
+
   function deleteAccount() {
     deleteUser(savedInfo.id);
     setTimeout(() => {
@@ -71,6 +71,7 @@ function Profile() {
   }
 
   function handleSaveData() {
+    console.log("line 74", form);
     updateUser(form);
     handleClick();
   }

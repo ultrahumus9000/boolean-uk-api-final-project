@@ -20,10 +20,13 @@ app.use(cookieParser());
 app.use(authRouter);
 
 app.use((req, res, next) => {
+  console.log("line 23", req.cookies);
   const { token } = req.cookies;
 
   const userInfo = token && validateToken(token);
-
+  console.log("token", token);
+  console.log("validate", validateToken(token));
+  console.log("userinfo", userInfo);
   if (userInfo) {
     req.currentUser = userInfo;
     next();

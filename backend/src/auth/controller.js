@@ -11,6 +11,8 @@ async function validateUser(req, res) {
 
     res.cookie("token", token, { httpOnly: true });
 
+    console.log(token);
+
     res.json({
       id: result.id,
       username: result.username,
@@ -25,7 +27,8 @@ async function validateUser(req, res) {
 }
 
 async function logoutUser(req, res) {
-  res.clearCookie("token");
+  console.log("token", req.cookies.token);
+
   //   console.log("line 30", req.cookies);
   res.json("you have log out");
 }

@@ -42,6 +42,8 @@ function Login() {
       .then((dataCheckResult) => {
         if (typeof dataCheckResult === "string") {
           alert("user info doesnt match");
+        } else if (dataCheckResult.error) {
+          alert("user info doenst match");
         } else {
           StoreUser(JSON.stringify(dataCheckResult));
           setActiveUser(dataCheckResult.id);
