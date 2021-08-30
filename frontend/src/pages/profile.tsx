@@ -40,39 +40,34 @@ function Profile() {
       case "avatar":
         newForm = { ...savedInfo, avatar: targetEvent.value };
         setForm(newForm);
-        localStorage.clear();
-        localStorage.setItem("userInfo", JSON.stringify(newForm));
+
         break;
       case "username":
         newForm = { ...savedInfo, username: targetEvent.value };
         setForm(newForm);
-        localStorage.clear();
-        localStorage.setItem("userInfo", JSON.stringify(newForm));
+
         break;
       case "first_name":
         newForm = { ...savedInfo, first_name: targetEvent.value };
         setForm(newForm);
-        localStorage.clear();
-        localStorage.setItem("userInfo", JSON.stringify(newForm));
+
         break;
       case "last_name":
         newForm = { ...savedInfo, last_name: targetEvent.value };
         setForm(newForm);
-        localStorage.clear();
-        localStorage.setItem("userInfo", JSON.stringify(newForm));
+
         break;
       case "email":
         newForm = { ...savedInfo, email: targetEvent.value };
         setForm(newForm);
-        localStorage.clear();
-        localStorage.setItem("userInfo", JSON.stringify(newForm));
         break;
     }
   }
 
   function handleSaveData() {
-    console.log("line 74", form);
     updateUser(form);
+    localStorage.clear();
+    localStorage.setItem("userInfo", JSON.stringify(form));
     handleClick();
   }
 

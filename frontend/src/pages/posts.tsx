@@ -1,5 +1,3 @@
-import "../styles/posts.css";
-
 import React, { useState } from "react";
 import "../styles/posts.css";
 import Header from "../components/Header";

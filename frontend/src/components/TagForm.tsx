@@ -16,7 +16,9 @@ export default function TagForm({ postId }: TagFormProps) {
   const [newTags, setNewTags] = useState<NewTagForm[]>([]);
   const createTag = useStore((store) => store.creatTag);
   useEffect(() => {
-    fetch("http://localhost:4000/tags/types")
+    fetch("http://localhost:4000/tags/types", {
+      credentials: "include",
+    })
       .then((resp) => resp.json())
       .then((tagsTypesFromServer) => {
         setTags(tagsTypesFromServer);
