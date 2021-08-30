@@ -9,7 +9,7 @@ function createToken(payload) {
 }
 
 function validateToken(token) {
-  console.log(JWT_SECRET);
+  console.log("12",JWT_SECRET);
   return jwt.verify(token, JWT_SECRET);
 }
 

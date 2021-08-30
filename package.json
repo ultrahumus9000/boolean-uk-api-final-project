@@ -1,0 +1,23 @@
+{
+  "name": "boolean-uk-api-final-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^8.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultrahumus9000/boolean-uk-api-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ultrahumus9000/boolean-uk-api-final-project/issues"
+  },
+  "homepage": "https://github.com/ultrahumus9000/boolean-uk-api-final-project#readme"
+}
