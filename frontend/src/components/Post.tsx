@@ -35,6 +35,9 @@ function Post({ post, users, tags }: PostProps) {
   const data = localStorage.getItem("userInfo");
   const savedInfo = JSON.parse(data === null ? "" : data);
 
+  if (comments.length === 0) {
+    return <h3>loading</h3>;
+  }
   if (tags === undefined) {
     return null;
   }

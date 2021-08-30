@@ -43,6 +43,10 @@ function Posts() {
     }
   }
 
+  if (posts.length === 0 || users.length === 0 || tags.length === 0) {
+    return <h3>loading</h3>;
+  }
+
   return (
     <>
       <Headline />
