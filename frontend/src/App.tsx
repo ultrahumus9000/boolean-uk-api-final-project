@@ -14,9 +14,6 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
-          <Login />
-        </Route>
         <Route path="/login" exact>
           <Login />
         </Route>
@@ -31,6 +28,9 @@ function App() {
         </Route>
         <Route path="/posts/:userId" exact>
           <OtherUserPage />
+        </Route>
+        <Route path="/">
+          <Login />
         </Route>
       </Switch>
     </Router>
